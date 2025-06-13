@@ -995,7 +995,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Charset>utf8mb4</Charset>
     </collation>
     <schema id="288" parent="1" name="db_passwortmanager">
-      <LastIntrospectionLocalTimestamp>2025-06-13.10:09:46</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2025-06-13.10:44:28</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="289" parent="1" name="information_schema">
@@ -1085,6 +1085,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="310" parent="301" name="cmdID">
+      <AutoIncrement>1</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int|0s</StoredType>
@@ -1095,7 +1096,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </column>
     <column id="312" parent="301" name="Behaviour">
       <Position>3</Position>
-      <StoredType>varchar(50)|0s</StoredType>
+      <StoredType>varchar(500)|0s</StoredType>
     </column>
     <index id="313" parent="301" name="PRIMARY">
       <ColNames>cmdID</ColNames>
