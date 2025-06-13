@@ -15,7 +15,16 @@ CREATE TABLE MasterPassword(
 );
 
 CREATE TABLE cmd(
-    cmdID int primary key not null,
+    cmdID int primary key not null auto_increment,
     possiblecommands varchar(15),
-    Behaviour varchar(50)
+    Behaviour varchar(500)
 );
+
+DROP table cmd;
+
+INSERT INTO cmd(cmdID, possiblecommands, behaviour) VALUES (1,'-s..', 'Speichert das Passwort und die dazugehörigen Angeben z.B. Label, etc.');
+INSERT INTO cmd(cmdid, possiblecommands, behaviour) VALUES (2,'-list.l', 'Listet alle Labels mit den dazugehörigen Passworts auf.');
+INSERT INTO cmd(cmdid, possiblecommands, behaviour) VALUES (3,'-get.g', 'Das zugehörige Label hinschreiben, und das Passwort wird mir angezeigt.');
+
+
+
