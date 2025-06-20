@@ -1,49 +1,67 @@
 package ch.css.inexkasso;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws SQLException {
+    private static final String URL   = "jdbc:derby:testDB;create=true";
+    private static final String TABLE = "MasterPassword";
 
-        String urlDatenbank = "jdbc:derby:testDB;create=true";
-        String user = "root";
-        String password = "";
+    public static void main(String[] args) {
+        try (Scanner scanner = new Scanner(System.in)) {
 
+            System.out.print("Bitte gib einen Username ein: ");
+            String username = scanner.nextLine().trim();
 
-        System.out.println("Bitte gebe ein Master Password ein, dass gibst du bei jeder neuen Anmeldung an. Es kann nicht mehr geändert werden.");
+            System.out.print("Bitte gib dein Master-Passwort ein: ");
+            String masterPassword = scanner.nextLine().trim();
 
-        System.out.print("Bitte gib einen Username ein: ");
-        Scanner eingabeusername = new Scanner(System.in);
-        String username = eingabeusername.nextLine();
+            createTableIfNotExists();
+            insertMasterPassword(username, masterPassword);
 
-        System.out.print("Bitte gib dein Passwort ein: ");
-        Scanner eingabepasswort = new Scanner(System.in);
-        String masterpasswort = eingabepasswort.nextLine();
+        }
+    }
 
-        System.out.println(username + masterpasswort);
+    // Methode zum Erstellen der Tabelle, falls sie nicht existiert
+    private static void createTableIfNotExists() {
+        String sql = "CREATE TABLE " + TABLE + " (" +
+                "MasterpasswordId INT PRIMARY KEY, " +
+                "Username VARCHAR(255), " +
+                "Masterpassword VARCHAR(255))";
 
-        try (Connection connection = DriverManager.getConnection(urlDatenbank, user, password)) {
+        try (Connection conn = DriverManager.getConnection(URL);
+             Statement stmt = conn.createStatement()) {
 
-            String sqlInsertStatement = "insert into Passwrotmanagerdb.MasterPassword(MasterpasswordId, Username, Masterpassword) values(1,username,masterpasswort)";
+            stmt.executeUpdate(sql);
 
-            try (PreparedStatement preparedStatement = connection.prepareStatement(sqlInsertStatement)) {
-                preparedStatement.setInt(1, 1);
-                preparedStatement.setString(2, username);
-                preparedStatement.setString(3, masterpasswort);
-
-                int rowsAffected = preparedStatement.executeUpdate();
-                if (rowsAffected > 0) {
-                    System.out.println("Daten erfolgreich eingefügt.");
-                } else {
-                    System.out.println("Fehler beim Einfügen der Daten.");
-                }
-            }
         } catch (SQLException e) {
-            System.err.println("Fehler beim Herstellen der Datenbankverbindung: " + e.getMessage());
+            // Fehlercode X0Y32 = "Table already exists" – ignoriere diesen
+            if (!"X0Y32".equals(e.getSQLState())) {
+                System.err.println("Fehler beim Erstellen der Tabelle: " + e.getMessage());
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private static void insertMasterPassword(String username, String masterPassword) {
+        String sql = "INSERT INTO " + TABLE + " (MasterpasswordId, Username, Masterpassword) VALUES (?, ?, ?)";
+
+        try (Connection conn = DriverManager.getConnection(URL);
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, 1);
+            ps.setString(2, username);
+            ps.setString(3, masterPassword);
+
+            int rows = ps.executeUpdate();
+            if (rows > 0) {
+                System.out.println("Daten erfolgreich eingefügt.");
+            } else {
+                System.out.println("Fehler beim Einfügen der Daten.");
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Datenbank-Fehler: " + e.getMessage());
             e.printStackTrace();
         }
     }
