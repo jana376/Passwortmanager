@@ -16,6 +16,7 @@
             <name qname="@" />
             <name qname="db_passwortmanager" />
             <name qname="passwrotmanagerdb" />
+            <name qname="information_schema" />
           </node>
         </introspection-scope>
       </schema-mapping>

@@ -1,4 +1,7 @@
-CREATE Database Passwrotmanagerdb;
+
+USE Passwortmanagerdb;
+CREATE SCHEMA PASSWORTMANAGERDB;
+
 
 CREATE TABLE Password(
     PasswordID int PRIMARY KEY Not null,
@@ -25,7 +28,5 @@ DROP table cmd;
 INSERT INTO cmd(cmdID, possiblecommands, behaviour) VALUES (1,'-s..', 'Speichert das Passwort und die dazugehörigen Angeben z.B. Label, etc.');
 INSERT INTO cmd(cmdid, possiblecommands, behaviour) VALUES (2,'-list.l', 'Listet alle Labels mit den dazugehörigen Passworts auf.');
 INSERT INTO cmd(cmdid, possiblecommands, behaviour) VALUES (3,'-get.g', 'Das zugehörige Label hinschreiben, und das Passwort wird mir angezeigt.');
-
-CREATE SCHEMA PASSWROTMANAGERDB;
 
 
