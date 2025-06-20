@@ -9,10 +9,8 @@ public class Main {
 
     public static void main(String[] args) throws SQLException {
         try (Scanner scanner = new Scanner(System.in)) {
-
             System.out.print("Bitte gib einen Username ein: ");
             String username = scanner.nextLine().trim();
-
             System.out.print("Bitte gib dein Master-Passwort ein: ");
             String masterPassword = scanner.nextLine().trim();
 
@@ -39,6 +37,7 @@ public class Main {
 
     private static void insertMasterPassword(String username, String masterPassword) throws SQLException {
 
+
         try (Connection conn = DriverManager.getConnection(URL)) {
             String checkSql = "SELECT COUNT(*) FROM MasterPassword WHERE MasterpasswordId = 1";
             try (PreparedStatement checkStmt = conn.prepareStatement(checkSql);
@@ -54,18 +53,26 @@ public class Main {
                         insertStmt.setString(3, masterPassword);
                         insertStmt.executeUpdate();
                         System.out.println("Datensatz erfolgreich eingefügt.");
-                        String selectSql = "SELECT * FROM MasterPassword WHERE MasterpasswordId = 1";
-                        try (PreparedStatement selectStmt = conn.prepareStatement(selectSql)) {
-                            ResultSet rs2 = selectStmt.executeQuery();
-                            System.out.println(rs2.getString("Username"));
-                            System.out.println(rs2.getString("Masterpassword"));
 
+                    }
+                } else if (count == 1) {
+                    String selectSql = "SELECT * FROM MasterPassword WHERE MasterpasswordId = 1";
+                    try (PreparedStatement selectStmt = conn.prepareStatement(selectSql)) {
+                        ResultSet rs2 = selectStmt.executeQuery();
+                        if (rs2.next()) {
+                            String usernameInDB = rs2.getString("Username");
+                            String passwordInDB = rs2.getString("Masterpassword");
+                            if (username.equals(usernameInDB) && masterPassword.equals(passwordInDB)) {
+                                System.out.println("Hallo Jana, du bist erfolgreich angemeldet worden. :)");
+                            } else {
+                                System.out.println("Zugangsdaten stimmen nicht überein.");
+                            }
                         }
                     }
-                } else {
-                    System.out.println("Das Masterpasswort existiert bereits. Änderungen sind nicht erlaubt.");
                 }
             }
         }
     }
 }
+//Username: jana123
+//Passwort: ooo.oreo
