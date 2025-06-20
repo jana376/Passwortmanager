@@ -1,8 +1,8 @@
 ----------------------------------------------------------------
-Thu Jun 05 15:29:42 CEST 2025:
-Booten von Derby-Version The Apache Software Foundation - Apache Derby - 10.17.1.0 - (1913217): Instanz a816c00e-0197-4048-7c55-00001f25cbd0
-für Datenbankverzeichnis memory:C:\temp\Passwortmanager\testDB mit Class Loader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868
-Geladen aus file:/C:/db-derby-10.17.1.0-bin(1)/db-derby-10.17.1.0-bin/lib/derby.jar
+Fri Jun 20 08:28:35 CEST 2025:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.17.1.0 - (1913217): instance a816c00e-0197-8c06-5657-00001f1966b0 
+on database directory memory:C:\temp\Passwortmanager\testDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868 
+Loaded from file:/C:/Users/jana/.m2/repository/org/apache/derby/derby/10.17.1.0/derby-10.17.1.0.jar
 java.vendor=Oracle Corporation
 java.runtime.version=23+37-2369
 user.dir=C:\temp\Passwortmanager
@@ -10,4 +10,4 @@ os.name=Windows 11
 os.arch=amd64
 os.version=10.0
 derby.system.home=null
-Datenbank-Class Loader wurde gestartet - derby.database.classpath=''
+Database Class Loader started - derby.database.classpath=''

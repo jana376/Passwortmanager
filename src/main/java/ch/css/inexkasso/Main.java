@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws SQLException {
 
-        String urlDatenbank = "jdbc:derby:memory:testDB;create=true";
+        String urlDatenbank = "jdbc:derby:testDB;create=true";
         String user = "root";
         String password = "";
 
@@ -28,7 +28,7 @@ public class Main {
 
         try (Connection connection = DriverManager.getConnection(urlDatenbank, user, password)) {
 
-            String sqlInsertStatement = "insert into Masterpassword(MasterpasswordId, Username, Masterpassword) values(1,username,masterpasswort)";
+            String sqlInsertStatement = "insert into Passwrotmanagerdb.MasterPassword(MasterpasswordId, Username, Masterpassword) values(1,username,masterpasswort)";
 
             try (PreparedStatement preparedStatement = connection.prepareStatement(sqlInsertStatement)) {
                 preparedStatement.setInt(1, 1);

@@ -26,5 +26,6 @@ INSERT INTO cmd(cmdID, possiblecommands, behaviour) VALUES (1,'-s..', 'Speichert
 INSERT INTO cmd(cmdid, possiblecommands, behaviour) VALUES (2,'-list.l', 'Listet alle Labels mit den dazugehörigen Passworts auf.');
 INSERT INTO cmd(cmdid, possiblecommands, behaviour) VALUES (3,'-get.g', 'Das zugehörige Label hinschreiben, und das Passwort wird mir angezeigt.');
 
-INSERT INTO MasterPassword(masterpasswordid, username, masterpassword)
+CREATE SCHEMA PASSWROTMANAGERDB;
+
 
