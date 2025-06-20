@@ -1,5 +1,4 @@
 
-USE Passwortmanagerdb;
 
 CREATE TABLE Password(
     PasswordID int PRIMARY KEY Not null,
@@ -9,14 +8,14 @@ CREATE TABLE Password(
     NameUser varchar(50)
 );
 
-CREATE TABLE root.MasterPassword(
+CREATE TABLE MasterPassword(
     MasterpasswordId int PRIMARY KEY not null,
     Username varchar(50),
     Masterpassword varchar(100)
 );
 
 CREATE TABLE cmd(
-    cmdID int primary key not null auto_increment,
+    cmdID int primary key not null,
     possiblecommands varchar(15),
     Behaviour varchar(500)
 );
