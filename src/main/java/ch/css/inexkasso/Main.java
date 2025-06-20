@@ -13,9 +13,18 @@ public class Main {
             String username = scanner.nextLine().trim();
             System.out.print("Bitte gib dein Master-Passwort ein: ");
             String masterPassword = scanner.nextLine().trim();
-
             createTableIfNotExists();
-            insertMasterPassword(username, masterPassword);
+
+            if (!isMasterPasswordStored()) {
+                insertMasterPassword(username, masterPassword);
+                System.out.println("Datensatz erfolgreich eingefügt.");
+            } else {
+                if (credentialsMatch(username, masterPassword)) {
+                    System.out.println("Hallo Jana, du bist erfolgreich angemeldet worden. :)");
+                } else {
+                    System.out.println("Zugangsdaten stimmen nicht überein.");
+                }
+            }
         }
     }
 
@@ -25,54 +34,50 @@ public class Main {
                 "Username VARCHAR(255), " +
                 "Masterpassword VARCHAR(255))";
         try (Connection conn = DriverManager.getConnection(URL);
-             Statement stmt = conn.createStatement()) {
+            Statement stmt = conn.createStatement()) {
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
-            // Fehlercode X0Y32 = "Table already exists" – ignoriere diesen
             if (!"X0Y32".equals(e.getSQLState())) {
                 System.err.println("Fehler beim Erstellen der Tabelle");
             }
         }
     }
 
-    private static void insertMasterPassword(String username, String masterPassword) throws SQLException {
-
-
-        try (Connection conn = DriverManager.getConnection(URL)) {
-            String checkSql = "SELECT COUNT(*) FROM MasterPassword WHERE MasterpasswordId = 1";
-            try (PreparedStatement checkStmt = conn.prepareStatement(checkSql);
-                 ResultSet rs = checkStmt.executeQuery()) {
-                rs.next();
-                int count = rs.getInt(1);
-
-                if (count == 0) {
-                    String insertSql = "INSERT INTO MasterPassword (MasterpasswordId, Username, Masterpassword) VALUES (?, ?, ?)";
-                    try (PreparedStatement insertStmt = conn.prepareStatement(insertSql)) {
-                        insertStmt.setInt(1, 1);
-                        insertStmt.setString(2, username);
-                        insertStmt.setString(3, masterPassword);
-                        insertStmt.executeUpdate();
-                        System.out.println("Datensatz erfolgreich eingefügt.");
-
-                    }
-                } else if (count == 1) {
-                    String selectSql = "SELECT * FROM MasterPassword WHERE MasterpasswordId = 1";
-                    try (PreparedStatement selectStmt = conn.prepareStatement(selectSql)) {
-                        ResultSet rs2 = selectStmt.executeQuery();
-                        if (rs2.next()) {
-                            String usernameInDB = rs2.getString("Username");
-                            String passwordInDB = rs2.getString("Masterpassword");
-                            if (username.equals(usernameInDB) && masterPassword.equals(passwordInDB)) {
-                                System.out.println("Hallo Jana, du bist erfolgreich angemeldet worden. :)");
-                            } else {
-                                System.out.println("Zugangsdaten stimmen nicht überein.");
-                            }
-                        }
-                    }
-                }
-            }
+    private static boolean isMasterPasswordStored() throws SQLException {
+        String sql = "SELECT COUNT(*) FROM " + TABLE + " WHERE MasterpasswordId = 1";
+        try (Connection conn = DriverManager.getConnection(URL);
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery()) {
+            rs.next();
+            return rs.getInt(1) > 0;
         }
     }
+
+    private static void insertMasterPassword(String username, String password) throws SQLException {
+        String sql = "INSERT INTO " + TABLE + " (MasterpasswordId, Username, Masterpassword) VALUES (1, ?, ?)";
+        try (Connection conn = DriverManager.getConnection(URL);
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            stmt.executeUpdate();
+        }
+    }
+
+    private static boolean credentialsMatch(String inputUsername, String inputPassword) throws SQLException {
+        String sql = "SELECT Username, Masterpassword FROM " + TABLE + " WHERE MasterpasswordId = 1";
+        try (Connection conn = DriverManager.getConnection(URL);
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                String dbUsername = rs.getString("Username");
+                String dbPassword = rs.getString("Masterpassword");
+                return inputUsername.equals(dbUsername) && inputPassword.equals(dbPassword);
+            }
+        }
+        return false;
+    }
 }
-//Username: jana123
-//Passwort: ooo.oreo
+/*
+* Username: jana123
+* Passwort: ooo.oreo
+* */
