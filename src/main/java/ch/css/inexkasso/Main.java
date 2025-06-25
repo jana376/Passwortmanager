@@ -8,24 +8,48 @@ public class Main {
     private static final String TABLE = "MasterPassword";
 
     public static void main(String[] args) throws SQLException {
-        try (Scanner scanner = new Scanner(System.in)) {
-            System.out.print("Bitte gib einen Username ein: ");
-            String username = scanner.nextLine().trim();
-            System.out.print("Bitte gib dein Master-Passwort ein: ");
-            String masterPassword = scanner.nextLine().trim();
-            createTableIfNotExists();
+        Scanner scanner = new Scanner(System.in);
 
-            if (!isMasterPasswordStored()) {
-                insertMasterPassword(username, masterPassword);
-                System.out.println("Datensatz erfolgreich eingefügt.");
-            } else {
-                if (credentialsMatch(username, masterPassword)) {
-                    System.out.println("Hallo Jana, du bist erfolgreich angemeldet worden. :)");
-                } else {
-                    System.out.println("Zugangsdaten stimmen nicht überein.");
-                }
+        System.out.print("Bitte gib einen Username ein: ");
+        String username = scanner.nextLine().trim();
+
+        System.out.print("Bitte gib dein Master-Passwort ein: ");
+        String masterPassword = scanner.nextLine().trim();
+
+        createTableIfNotExists();
+
+        if (!isMasterPasswordStored()) {
+            insertMasterPassword(username, masterPassword);
+            System.out.println("Datensatz erfolgreich eingefügt.");
+        } else {
+            while (!credentialsMatch(username, masterPassword)) {
+                System.out.println("Zugangsdaten stimmen nicht überein.");
+                System.out.print("Bitte gib einen Username ein: ");
+                username = scanner.nextLine().trim();
+                System.out.print("Bitte gib dein Master-Passwort ein: ");
+                masterPassword = scanner.nextLine().trim();
             }
+            System.out.println("Hallo " + username + ", du bist erfolgreich angemeldet worden. :)");
         }
+
+        System.out.print("Speichere das Passwort unter einem Namen: ");
+        String label = scanner.nextLine();
+
+        System.out.print("Wie lautet dein Username dort?: ");
+        String nameUser = scanner.nextLine();
+
+        System.out.print("Wie lautet dein Passwort dort?: ");
+        String password = scanner.nextLine();
+
+        System.out.print("Wie heisst die Website oder Application?: ");
+        String applicationwebsitee = scanner.nextLine();
+
+        System.out.println("Danke! Die Daten wurden gespeichert.");
+
+        createPasswordTableIfNotExists();
+        savePassword(label, nameUser, password, applicationwebsitee);
+
+        scanner.close();
     }
 
     private static void createTableIfNotExists() {
@@ -76,8 +100,51 @@ public class Main {
         }
         return false;
     }
+    private static void createPasswordTableIfNotExists() {
+        String sql = """
+                CREATE TABLE Password(
+                    PasswordID int PRIMARY KEY Not null,
+                    Label varchar(50) not null,
+                    Password varchar(100) not null,
+                    ApplicationWebsite varchar(50),
+                    NameUser varchar(50)
+                )
+                """;
+
+        try (Connection conn = DriverManager.getConnection(URL);
+
+            Statement stmt = conn.createStatement()) {
+            stmt.executeUpdate(sql);
+        } catch (SQLException e) {
+            if (!e.getSQLState().equals("X0Y32")) {
+            }
+        }
+    }
+
+    private static void savePassword(String label, String nameUser, String password, String applicationwebsitee) {
+        String sql = "INSERT INTO Password (Label, Password, ApplicationWebsite, NameUser)VALUES (?, ?, ?, ?);";
+        try (Connection conn = DriverManager.getConnection(URL); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, label);
+            ps.setString(2, password);
+            ps.setString(3, applicationwebsitee);
+            ps.setString(4, nameUser);
+            int rows = ps.executeUpdate();
+
+            if (rows > 0) {
+                System.out.println("Passwort wurde erfolgreich gespeichert.");
+            } else {
+                System.out.println("Fehler beim Speichern des Passworts.");
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Fehler bei Datenbankverbindung");
+        }
+
+    }
 }
+
 /*
-* Username: jana123
-* Passwort: ooo.oreo
-* */
+ * Username: jana123
+ * Passwort: ooo.oreo
+ */
