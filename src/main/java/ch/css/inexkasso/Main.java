@@ -75,15 +75,26 @@ Masterpassword masterpassword = new Masterpassword();
             System.out.println("Hallo " + username + ", du bist erfolgreich angemeldet worden. :)");
         }
     }
-    private static void listlabelsfuction() {
+    private static void listlabelsfuction() throws SQLException {
         String sql = """
-                SELECT Label AND Password From Password""";
+                SELECT Label,Password From Password""";
 
         try (Connection conn = DriverManager.getConnection(URL);
-             Statement stmt = conn.createStatement()) {
-            stmt.executeUpdate(sql);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql)) {
+
+            System.out.printf("| %-40s | %-20s |\n", "Label", "Passwort");
+            System.out.println("-------------------------------------------------------------------");
+            while (rs.next()) {
+                String label = rs.getString("Label");
+                String password = rs.getString("Password");
+                System.out.printf("| %-40s | %-20s |\n", label, password);
+            }
+
+            System.out.println("-------------------------------------------------------------------");
+
         } catch (SQLException e) {
-            e.getSQLState();
+            System.err.println("Fehler beim Abrufen der Passwörter: " + e.getMessage());
         }
     }
 }
