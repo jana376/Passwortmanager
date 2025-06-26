@@ -3,11 +3,14 @@ package ch.css.inexkasso;
 import java.sql.*;
 import java.util.Scanner;
 
+import static ch.css.inexkasso.Masterpassword.*;
+
 public class Main {
     private static final String URL = "jdbc:derby:testDB;create=true";
     private static final String TABLE = "MasterPassword";
 
     public static void main(String[] args) throws SQLException {
+Masterpassword masterpassword = new Masterpassword();
 
         createTableIfNotExists();
 
@@ -53,54 +56,6 @@ public class Main {
         scanner.close();
     }
 
-    private static void createTableIfNotExists() {
-        String sql = "CREATE TABLE " + TABLE + " (" +
-                "MasterpasswordId INT PRIMARY KEY, " +
-                "Username VARCHAR(255), " +
-                "Masterpassword VARCHAR(255))";
-        try (Connection conn = DriverManager.getConnection(URL);
-            Statement stmt = conn.createStatement()) {
-            stmt.executeUpdate(sql);
-        } catch (SQLException e) {
-            if (!"X0Y32".equals(e.getSQLState())) {
-                System.err.println("Fehler beim Erstellen der Tabelle");
-            }
-        }
-    }
-
-    private static boolean isMasterPasswordStored() throws SQLException {
-        String sql = "SELECT COUNT(*) FROM " + TABLE + " WHERE MasterpasswordId = 1";
-        try (Connection conn = DriverManager.getConnection(URL);
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            ResultSet rs = stmt.executeQuery()) {
-            rs.next();
-            return rs.getInt(1) > 0;
-        }
-    }
-
-    private static void insertMasterPassword(String username, String password) throws SQLException {
-        String sql = "INSERT INTO " + TABLE + " (MasterpasswordId, Username, Masterpassword) VALUES (1, ?, ?)";
-        try (Connection conn = DriverManager.getConnection(URL);
-            PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, username);
-            stmt.setString(2, password);
-            stmt.executeUpdate();
-        }
-    }
-
-    private static boolean credentialsMatch(String inputUsername, String inputPassword) throws SQLException {
-        String sql = "SELECT Username, Masterpassword FROM " + TABLE + " WHERE MasterpasswordId = 1";
-        try (Connection conn = DriverManager.getConnection(URL);
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            ResultSet rs = stmt.executeQuery()) {
-            if (rs.next()) {
-                String dbUsername = rs.getString("Username");
-                String dbPassword = rs.getString("Masterpassword");
-                return inputUsername.equals(dbUsername) && inputPassword.equals(dbPassword);
-            }
-        }
-        return false;
-    }
 
     private static void createPasswordTableIfNotExists() {
         String sql = """
@@ -116,8 +71,7 @@ public class Main {
             Statement stmt = conn.createStatement()) {
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
-            if (!e.getSQLState().equals("X0Y32")) {
-            }
+            e.getSQLState();
         }
     }
 
