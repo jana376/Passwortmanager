@@ -1,7 +1,6 @@
 package ch.css.inexkasso;
 
 import java.sql.*;
-import java.util.Scanner;
 
 public class Masterpassword {
     private static final String URL = "jdbc:derby:testDB;create=true";
@@ -23,7 +22,7 @@ public class Masterpassword {
         }
     }
 
-    public static boolean isMasterPasswordStored() throws SQLException {
+    public boolean isMasterPasswordStored() throws SQLException {
         String sql = "SELECT COUNT(*) FROM " + TABLE + " WHERE MasterpasswordId = 1";
         try (Connection conn = DriverManager.getConnection(URL);
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -33,7 +32,7 @@ public class Masterpassword {
         }
     }
 
-    public static void insertMasterPassword(String username, String password) throws SQLException {
+    public void insertMasterPassword(String username, String password) throws SQLException {
         String sql = "INSERT INTO " + TABLE + " (MasterpasswordId, Username, Masterpassword) VALUES (1, ?, ?)";
         try (Connection conn = DriverManager.getConnection(URL);
             PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -43,7 +42,7 @@ public class Masterpassword {
         }
     }
 
-    public static boolean credentialsMatch(String inputUsername, String inputPassword) throws SQLException {
+    public boolean checkCredentials(String inputUsername, String inputPassword) throws SQLException {
         String sql = "SELECT Username, Masterpassword FROM " + TABLE + " WHERE MasterpasswordId = 1";
         try (Connection conn = DriverManager.getConnection(URL);
             PreparedStatement stmt = conn.prepareStatement(sql);
