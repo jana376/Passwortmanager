@@ -8,6 +8,9 @@ public class Main {
     private static final String TABLE = "MasterPassword";
 
     public static void main(String[] args) throws SQLException {
+
+        createTableIfNotExists();
+
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Bitte gib einen Username ein: ");
@@ -15,8 +18,6 @@ public class Main {
 
         System.out.print("Bitte gib dein Master-Passwort ein: ");
         String masterPassword = scanner.nextLine().trim();
-
-        createTableIfNotExists();
 
         if (!isMasterPasswordStored()) {
             insertMasterPassword(username, masterPassword);
@@ -100,19 +101,18 @@ public class Main {
         }
         return false;
     }
+
     private static void createPasswordTableIfNotExists() {
         String sql = """
                 CREATE TABLE Password(
-                    PasswordID int PRIMARY KEY Not null,
-                    Label varchar(50) not null,
-                    Password varchar(100) not null,
-                    ApplicationWebsite varchar(50),
-                    NameUser varchar(50)
-                )
-                """;
+                PasswordId INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+                Label VARCHAR(255),
+                Password VARCHAR(255),
+                ApplicationWebsite VARCHAR(255),
+                NameUser VARCHAR(255)
+                )""";
 
         try (Connection conn = DriverManager.getConnection(URL);
-
             Statement stmt = conn.createStatement()) {
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
@@ -122,7 +122,7 @@ public class Main {
     }
 
     private static void savePassword(String label, String nameUser, String password, String applicationwebsitee) {
-        String sql = "INSERT INTO Password (Label, Password, ApplicationWebsite, NameUser)VALUES (?, ?, ?, ?);";
+        String sql = "INSERT INTO Password (Label, Password, ApplicationWebsite, NameUser) VALUES (?, ?, ?, ?)";
         try (Connection conn = DriverManager.getConnection(URL); PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, label);
@@ -139,8 +139,8 @@ public class Main {
 
         } catch (SQLException e) {
             System.err.println("Fehler bei Datenbankverbindung");
-        }
 
+        }
     }
 }
 
