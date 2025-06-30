@@ -33,8 +33,11 @@ public class Main {
             System.out.print("Welches ist das Label, dessen Passwort du ausgeben willst?: ");
             userInput = scanner.nextLine();
             getPasswordfunction(userInput);
-            scanner.close();
+        }else if (userInput.equals("help")) {
+            help();
         }
+            scanner.close();
+
     }
 
     private static void handleMasterPassword(Scanner scanner, Masterpassword masterpassword) throws SQLException {
@@ -119,6 +122,16 @@ public class Main {
                 System.out.println("Kein Passwort für das Label \"" + userInput + "\" gefunden.");
             }
 
+        } catch (SQLException e) {
+            System.err.println("Fehler beim Abrufen des Passworts: " + e.getMessage());
+        }
+    }
+    private static void help( ) {
+        String sql = "SELECT possiblecommands, behaviour FROM cmd";
+
+        try (Connection conn = DriverManager.getConnection(URL);
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+            System.out.println(ps);
         } catch (SQLException e) {
             System.err.println("Fehler beim Abrufen des Passworts: " + e.getMessage());
         }
