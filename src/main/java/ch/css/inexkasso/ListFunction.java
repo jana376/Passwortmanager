@@ -25,7 +25,7 @@ public class ListFunction {
                 String password = rs.getString("Password");
                 String applicationWebsite = rs.getString("ApplicationWebsite");
                 String name = rs.getString("NameUser");
-                System.out.printf("| %-40s | %-20s | %-40s | %-20s |\n", label, password, applicationWebsite, name);
+                System.out.printf("| %-40s | %-20s | %-40s | %-20s |\n", label, cryptoPassword.decrypt(cryptoPassword.encrypt(password)), applicationWebsite, name);
             }
 
             System.out.println("--------------------------------------------------------------------------------------------------------------------------------------");

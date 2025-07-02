@@ -17,6 +17,7 @@ public class GetPasswordFunction {
 
             if (rs.next()) {
                 String password = rs.getString("Password");
+                String decrypt = cryptoPassword.decrypt(cryptoPassword.encrypt(password));
                 System.out.println("Das Passwort für Label \"" + userInput + "\" ist: " + password);
             } else {
                 System.out.println("Kein Passwort für das Label \"" + userInput + "\" gefunden.");
