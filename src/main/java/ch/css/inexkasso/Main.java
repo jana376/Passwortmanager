@@ -10,15 +10,14 @@ import static ch.css.inexkasso.Masterpassword.*;
 
 public class Main {
      public static final String URL = "jdbc:derby:testDB;create=true";
+    public static final String SAFE_BEFEHL = "-s..";
+    public static final String LIST_LABEL_BEFEHL = "-list.l";
+    public static final String GET_PASSWORDWITHLABEL_BEFEHL = "-get.g";
+    public static final String HELP_USER_BEFEHL = "help";
+    public static final String DELETE_PASSWORD_BEFEHL = "-delete.d";
+    public static final String EXIT_PROGRAMM_BEFEHL = "exit";
 
     public static void main(String[] args) throws SQLException {
-
-        String safeBefehl = "-s..";
-        String listLabel = "-list.l";
-        String getPasswordwithlabel = "-get.g";
-        String helpUser = "help";
-        String deletePassword = "-delete.d";
-        String exitProgramm = "exit";
 
         Masterpassword masterpassword = new Masterpassword();
         createTableIfNotExists();
@@ -31,23 +30,23 @@ public class Main {
         while (true) {
             System.out.print("Was möchtest du machen? ");
             userInput = scanner.nextLine();
-            if (userInput.equals(safeBefehl)) {
+            if (userInput.equals(SAFE_BEFEHL)) {
                 handleSavePassword(scanner);
-            } else if (userInput.equals(listLabel)) {
+            } else if (userInput.equals(LIST_LABEL_BEFEHL)) {
                 listlabelsfuction();
-            } else if (userInput.equals(getPasswordwithlabel)) {
+            } else if (userInput.equals(GET_PASSWORDWITHLABEL_BEFEHL)) {
                 System.out.print("Welches ist das Label, dessen Passwort du ausgeben willst?: ");
                 String label = scanner.nextLine();
                 getPasswordfunction(label);
-            } else if (userInput.equals(helpUser)) {
+            } else if (userInput.equals(HELP_USER_BEFEHL)) {
                 HelpFunction.help();
-            } else if (userInput.equals(deletePassword)) {
+            } else if (userInput.equals(DELETE_PASSWORD_BEFEHL)) {
                 DeleteFunction.deletePassword(scanner);
-            } else if (userInput.equals(exitProgramm)) {
+            } else if (userInput.equals(EXIT_PROGRAMM_BEFEHL)) {
                 System.out.println("Programm wurde erfolgreich beendet.");
                 break;
             } else {
-                System.out.println("Unbekannter Befehl. Gib 'help' ein für alle Optionen.");
+                System.out.println("Unbekannter Befehl. Mit dem Befehl help kannst du alle Befehle sehen und was ihre Funktion ist.");
             }
         }
 
@@ -76,7 +75,7 @@ public class Main {
         }
     }
 
-    private static void handleSavePassword(Scanner scanner) throws SQLException {
+    private static void handleSavePassword(Scanner scanner) {
         SafeFunction safeFunction = new SafeFunction();
 
         System.out.print("Speichere das Passwort unter einem Namen: ");
@@ -99,7 +98,6 @@ public class Main {
     }
 
 }
-
 
 /*
  * Username: jana123
