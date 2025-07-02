@@ -7,21 +7,23 @@ import static ch.css.inexkasso.Constant.URL;
 public class HelpFunction {
     public static void help() {
         String sql = "SELECT possiblecommands, behaviour FROM cmd";
-        try (Connection conn = DriverManager.getConnection(URL);
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql)) {
 
-            System.out.printf("| %-40s | %-75s |\n", "possiblecommands", "behaviour");
-            System.out.println("-------------------------------------------------------------------------------------------------------------------------");
+        try (Connection conn = DriverManager.getConnection(URL);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            System.out.printf("| %-35s | %-80s |\n", "possiblecommands", "behaviour");
+            System.out.println("---------------------------------------------------------------------------------------------------------------");
+
             while (rs.next()) {
-                String possiblecommands = rs.getString("possiblecommands");
+                String command = rs.getString("possiblecommands");
                 String behaviour = rs.getString("behaviour");
-                System.out.printf("| %-40s | %-75s |\n", possiblecommands, behaviour);
+                System.out.printf("| %-35s | %-80s |\n", command, behaviour);
             }
 
-            System.out.println("-------------------------------------------------------------------------------------------------------------------------");
         } catch (SQLException e) {
-            System.err.println("Fehler beim Abrufen der Hilfeseite" + e.getMessage());
+            System.err.println("Fehler beim Abrufen der Hilfeseite: " + e.getMessage());
         }
     }
+
 }

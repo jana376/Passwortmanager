@@ -3,6 +3,7 @@ package ch.css.inexkasso;
 import java.sql.*;
 import java.util.Scanner;
 
+import static ch.css.inexkasso.Constant.*;
 import static ch.css.inexkasso.DeleteFunction.deletePassword;
 import static ch.css.inexkasso.GetPasswordFunction.getPasswordfunction;
 import static ch.css.inexkasso.HelpFunction.help;
@@ -12,24 +13,18 @@ import static ch.css.inexkasso.SafeFunction.*;
 
 public class Main {
 
-    public static final String SAFE_BEFEHL = "-s..";
-    public static final String LIST_LABEL_BEFEHL = "-list.l";
-    public static final String GET_PASSWORDWITHLABEL_BEFEHL = "-get.g";
-    public static final String HELP_USER_BEFEHL = "help";
-    public static final String DELETE_PASSWORD_BEFEHL = "-delete.d";
-    public static final String EXIT_PROGRAMM_BEFEHL = "exit";
-
     public static void main(String[] args) throws SQLException {
         Masterpassword masterpassword = new Masterpassword();
         createTableIfNotExists();
 
         Scanner scanner = new Scanner(System.in);
         handleMasterPassword(scanner, masterpassword);
-        wasMoechtestDuMachen(scanner);
+        askWhatUserWantsToDo(scanner);
         scanner.close();
     }
 
-    private static void wasMoechtestDuMachen(Scanner scanner) {
+
+    private static void askWhatUserWantsToDo(Scanner scanner) {
         String userInput;
         while (true) {
             System.out.print("Was möchtest du machen? ");
