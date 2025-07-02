@@ -1,6 +1,7 @@
 package ch.css.inexkasso;
 
 import java.sql.*;
+import java.util.Scanner;
 
 import static ch.css.inexkasso.Main.URL;
 
@@ -57,7 +58,27 @@ public class Masterpassword {
         }
         return false;
     }
+    static void handleMasterPassword(Scanner scanner, Masterpassword masterpassword) throws SQLException {
+        System.out.print("Bitte gib einen Username ein: ");
+        String username = scanner.nextLine().trim();
 
+        System.out.print("Bitte gib dein Master-Passwort ein: ");
+        String masterPassword = scanner.nextLine().trim();
+
+        if (!masterpassword.isMasterPasswordStored()) {
+            masterpassword.insertMasterPassword(username, masterPassword);
+            System.out.println("Datensatz erfolgreich eingefügt.");
+        } else {
+            while (!masterpassword.checkCredentials(username, masterPassword)) {
+                System.out.println("Zugangsdaten stimmen nicht überein.");
+                System.out.print("Bitte gib einen Username ein: ");
+                username = scanner.nextLine().trim();
+                System.out.print("Bitte gib dein Master-Passwort ein: ");
+                masterPassword = scanner.nextLine().trim();
+            }
+            System.out.println("Hallo " + username + ", du bist erfolgreich angemeldet worden. :)");
+        }
+    }
 }
 
 /*

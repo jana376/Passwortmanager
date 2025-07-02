@@ -1,7 +1,9 @@
 package ch.css.inexkasso;
 
 import java.sql.*;
+import java.util.Scanner;
 
+import static ch.css.inexkasso.ListFunction.listlabelsfuction;
 import static ch.css.inexkasso.Main.URL;
 
 
@@ -46,6 +48,27 @@ public class SafeFunction {
             System.err.println("Fehler bei Datenbankverbindung");
 
         }
+    }
+    static void handleSavePassword(Scanner scanner) {
+        SafeFunction safeFunction = new SafeFunction();
+
+        System.out.print("Speichere das Passwort unter einem Namen: ");
+        String label = scanner.nextLine();
+
+        System.out.print("Wie lautet dein Username dort?: ");
+        String nameUser = scanner.nextLine();
+
+        System.out.print("Wie lautet dein Passwort dort?: ");
+        String password = scanner.nextLine();
+
+        System.out.print("Wie heisst die Website oder Application?: ");
+        String applicationwebsitee = scanner.nextLine();
+
+        System.out.println("Danke! Die Daten wurden gespeichert.");
+
+        safeFunction.createPasswordTableIfNotExists();
+        safeFunction.savePassword(label, nameUser, password, applicationwebsitee);
+        listlabelsfuction();
     }
 }
 

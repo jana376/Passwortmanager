@@ -3,9 +3,12 @@ package ch.css.inexkasso;
 import java.sql.*;
 import java.util.Scanner;
 
+import static ch.css.inexkasso.DeleteFunction.deletePassword;
 import static ch.css.inexkasso.GetPasswordFunction.getPasswordfunction;
+import static ch.css.inexkasso.HelpFunction.help;
 import static ch.css.inexkasso.ListFunction.listlabelsfuction;
 import static ch.css.inexkasso.Masterpassword.*;
+import static ch.css.inexkasso.SafeFunction.*;
 
 public class Main {
     public static final String URL = "jdbc:derby:testDB;create=true";
@@ -22,8 +25,12 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         handleMasterPassword(scanner, masterpassword);
-        String userInput;
+        wasMoechtestDuMachen(scanner);
+        scanner.close();
+    }
 
+    private static void wasMoechtestDuMachen(Scanner scanner) {
+        String userInput;
         while (true) {
             System.out.print("Was möchtest du machen? ");
             userInput = scanner.nextLine();
@@ -36,9 +43,9 @@ public class Main {
                 String label = scanner.nextLine();
                 getPasswordfunction(label);
             } else if (userInput.equals(HELP_USER_BEFEHL)) {
-                HelpFunction.help();
+                help();
             } else if (userInput.equals(DELETE_PASSWORD_BEFEHL)) {
-                DeleteFunction.deletePassword(scanner);
+                deletePassword(scanner);
             } else if (userInput.equals(EXIT_PROGRAMM_BEFEHL)) {
                 System.out.println("Programm wurde erfolgreich beendet.");
                 break;
@@ -46,51 +53,6 @@ public class Main {
                 System.out.println("Unbekannter Befehl. Mit dem Befehl help kannst du alle Befehle sehen und was ihre Funktion ist.");
             }
         }
-        scanner.close();
-    }
-
-    private static void handleMasterPassword(Scanner scanner, Masterpassword masterpassword) throws SQLException {
-        System.out.print("Bitte gib einen Username ein: ");
-        String username = scanner.nextLine().trim();
-
-        System.out.print("Bitte gib dein Master-Passwort ein: ");
-        String masterPassword = scanner.nextLine().trim();
-
-        if (!masterpassword.isMasterPasswordStored()) {
-            masterpassword.insertMasterPassword(username, masterPassword);
-            System.out.println("Datensatz erfolgreich eingefügt.");
-        } else {
-            while (!masterpassword.checkCredentials(username, masterPassword)) {
-                System.out.println("Zugangsdaten stimmen nicht überein.");
-                System.out.print("Bitte gib einen Username ein: ");
-                username = scanner.nextLine().trim();
-                System.out.print("Bitte gib dein Master-Passwort ein: ");
-                masterPassword = scanner.nextLine().trim();
-            }
-            System.out.println("Hallo " + username + ", du bist erfolgreich angemeldet worden. :)");
-        }
-    }
-
-    private static void handleSavePassword(Scanner scanner) {
-        SafeFunction safeFunction = new SafeFunction();
-
-        System.out.print("Speichere das Passwort unter einem Namen: ");
-        String label = scanner.nextLine();
-
-        System.out.print("Wie lautet dein Username dort?: ");
-        String nameUser = scanner.nextLine();
-
-        System.out.print("Wie lautet dein Passwort dort?: ");
-        String password = scanner.nextLine();
-
-        System.out.print("Wie heisst die Website oder Application?: ");
-        String applicationwebsitee = scanner.nextLine();
-
-        System.out.println("Danke! Die Daten wurden gespeichert.");
-
-        safeFunction.createPasswordTableIfNotExists();
-        safeFunction.savePassword(label, nameUser, password, applicationwebsitee);
-        listlabelsfuction();
     }
 }
 
