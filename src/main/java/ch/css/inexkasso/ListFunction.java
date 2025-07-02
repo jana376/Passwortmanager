@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.Scanner;
 
 import static ch.css.inexkasso.Masterpassword.createTableIfNotExists;
-import static ch.css.inexkasso.Main.URL;
+import static ch.css.inexkasso.Constant.URL;
 
 public class ListFunction {
 

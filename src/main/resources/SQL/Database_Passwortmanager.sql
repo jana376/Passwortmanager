@@ -22,8 +22,9 @@ INSERT INTO cmd(cmdID, possiblecommands, behaviour) VALUES (1,'-s..', 'Speichert
 INSERT INTO cmd(cmdid, possiblecommands, behaviour) VALUES (2,'-list.l', 'Listet alle Labels mit den dazugehörigen Passworts auf.');
 INSERT INTO cmd(cmdid, possiblecommands, behaviour) VALUES (3,'-get.g', 'Das zugehörige Label hinschreiben, und das Passwort wird mir angezeigt.');
 INSERT INTO cmd(cmdID, possiblecommands, Behaviour) VALUES (4,'help', 'Gebe alle Befehle aus, die es gibt und bekomme eine Erklärung.');
-INSERT INTO cmd(cmdID, possiblecommands, Behaviour) VALUES (4,'-delete.d', 'Lösche ein Passwort');
-INSERT INTO cmd(cmdID, possiblecommands, Behaviour) VALUES (4,'exit', 'Verlasse das Programm.');
+INSERT INTO cmd(cmdID, possiblecommands, Behaviour) VALUES (5,'-delete.d', 'Lösche ein Passwort');
+INSERT INTO cmd(cmdID, possiblecommands, Behaviour) VALUES (6,'exit', 'Verlasse das Programm.');
+INSERT into cmd(cmdID, possiblecommands, Behaviour) VALUES (7, 'b.z', 'Zurück zum Auswahlprogramm');
 
 
 

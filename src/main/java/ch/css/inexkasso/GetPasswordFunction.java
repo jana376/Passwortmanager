@@ -2,8 +2,7 @@ package ch.css.inexkasso;
 
 import java.sql.*;
 
-import static ch.css.inexkasso.Main.URL;
-
+import static ch.css.inexkasso.Constant.URL;
 public class GetPasswordFunction {
 
 

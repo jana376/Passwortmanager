@@ -11,7 +11,7 @@ import static ch.css.inexkasso.Masterpassword.*;
 import static ch.css.inexkasso.SafeFunction.*;
 
 public class Main {
-    public static final String URL = "jdbc:derby:testDB;create=true";
+
     public static final String SAFE_BEFEHL = "-s..";
     public static final String LIST_LABEL_BEFEHL = "-list.l";
     public static final String GET_PASSWORDWITHLABEL_BEFEHL = "-get.g";

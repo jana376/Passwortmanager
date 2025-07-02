@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.Scanner;
 
 import static ch.css.inexkasso.ListFunction.listlabelsfuction;
-import static ch.css.inexkasso.Main.URL;
+import static ch.css.inexkasso.Constant.URL;
 
 
 public class SafeFunction {
