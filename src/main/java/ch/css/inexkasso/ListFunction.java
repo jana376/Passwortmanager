@@ -11,6 +11,7 @@ public class ListFunction {
     private static final String TABLE = "MasterPassword";
 
     static void listlabelsfuction() {
+
         String sql = """
                 SELECT Label,Password, ApplicationWebsite,NameUser From Password""";
 
@@ -18,17 +19,18 @@ public class ListFunction {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql)) {
 
-            System.out.printf("| %-40s | %-20s |\n", "Label", "Passwort", "ApplicationWebsite", "NameUser");
-            System.out.println("-------------------------------------------------------------------");
+            System.out.printf("| %-40s | %-20s | %-40s | %-20s |\n", "Label", "Passwort", "ApplicationWebsite", "Username");
+
+            System.out.println("--------------------------------------------------------------------------------------------------------------------------------------");
             while (rs.next()) {
                 String label = rs.getString("Label");
                 String password = rs.getString("Password");
                 String applicationWebsite = rs.getString("ApplicationWebsite");
                 String name = rs.getString("NameUser");
-                System.out.printf("| %-40s | %-20s |\n", label, password,applicationWebsite,name);
+                System.out.printf("| %-40s | %-20s | %-40s | %-20s |\n", label, password, applicationWebsite, name);
             }
 
-            System.out.println("-------------------------------------------------------------------");
+            System.out.println("--------------------------------------------------------------------------------------------------------------------------------------");
 
         } catch (SQLException e) {
             System.err.println("Fehler beim Abrufen der Passwörter");

@@ -98,32 +98,6 @@ public class Main {
         safeFunction.savePassword(label, nameUser, password, applicationwebsitee);
         listlabelsfuction();
     }
-    /*
-    public static void createCMDTableIfNotExists() {
-        try (Connection conn = DriverManager.getConnection(URL);
-            Statement stmt = conn.createStatement()) {
-
-            String createTableSQL = """
-        CREATE TABLE cmd(
-            cmdID INT PRIMARY KEY NOT NULL,
-            possiblecommands VARCHAR(15),
-            Behaviour VARCHAR(500)
-        )
-        """;
-            stmt.executeUpdate(createTableSQL);
-
-            stmt.executeUpdate("INSERT INTO cmd(cmdID, possiblecommands, Behaviour) VALUES (1,'-s..', 'Speichert das Passwort und die dazugehörigen Angaben z.B. Label, etc.')");
-            stmt.executeUpdate("INSERT INTO cmd(cmdID, possiblecommands, Behaviour) VALUES (2,'-list.l', 'Listet alle Labels mit den dazugehörigen Passwörtern auf.')");
-            stmt.executeUpdate("INSERT INTO cmd(cmdID, possiblecommands, Behaviour) VALUES (3,'-get.g', 'Das zugehörige Label hinschreiben, und das Passwort wird mir angezeigt.')");
-            stmt.executeUpdate("INSERT INTO cmd(cmdID, possiblecommands, Behaviour) VALUES (4,'help', 'Gebe alle Befehle aus, die es gibt und bekomme eine Erklärung.')");
-            stmt.executeUpdate("INSERT INTO cmd(cmdID, possiblecommands, Behaviour) VALUES (5,'-delete.d', 'Lösche ein Passwort')");
-            stmt.executeUpdate("INSERT INTO cmd(cmdID, possiblecommands, Behaviour) VALUES (6,'exit', 'Verlasse das Programm.')");
-
-        } catch (SQLException e) {
-            System.err.println("SQL-Fehler: " + e.getMessage());
-        }
-    }
-*/
 
     private static void help() {
         String sql = "SELECT possiblecommands, behaviour FROM cmd";
