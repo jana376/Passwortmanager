@@ -1,6 +1,9 @@
 package ch.css.inexkasso;
 
 import java.sql.*;
+import java.util.Scanner;
+
+import static ch.css.inexkasso.ListFunction.listlabelsfuction;
 
 
 public class SafeFunction {

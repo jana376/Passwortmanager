@@ -21,5 +21,10 @@ CREATE TABLE cmd(
 INSERT INTO cmd(cmdID, possiblecommands, behaviour) VALUES (1,'-s..', 'Speichert das Passwort und die dazugehörigen Angeben z.B. Label, etc.');
 INSERT INTO cmd(cmdid, possiblecommands, behaviour) VALUES (2,'-list.l', 'Listet alle Labels mit den dazugehörigen Passworts auf.');
 INSERT INTO cmd(cmdid, possiblecommands, behaviour) VALUES (3,'-get.g', 'Das zugehörige Label hinschreiben, und das Passwort wird mir angezeigt.');
+INSERT INTO cmd(cmdID, possiblecommands, Behaviour) VALUES (4,'help', 'Gebe alle Befehle aus, die es gibt und bekomme eine Erklärung.');
+INSERT INTO cmd(cmdID, possiblecommands, Behaviour) VALUES (4,'-delete.d', 'Lösche ein Passwort');
+INSERT INTO cmd(cmdID, possiblecommands, Behaviour) VALUES (4,'exit', 'Verlasse das Programm.');
+
+
 
 SELECT * FROM MasterPassword;

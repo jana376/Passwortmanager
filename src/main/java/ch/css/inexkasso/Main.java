@@ -1,9 +1,10 @@
 package ch.css.inexkasso;
 
-import java.lang.classfile.Label;
 import java.sql.*;
 import java.util.Scanner;
 
+import static ch.css.inexkasso.GetPasswordFunction.getPasswordfunction;
+import static ch.css.inexkasso.ListFunction.listlabelsfuction;
 import static ch.css.inexkasso.Masterpassword.*;
 
 
@@ -16,6 +17,9 @@ public class Main {
         String safeBefehl = "-s..";
         String listLabel = "-list.l";
         String getPasswordwithlabel = "-get.g";
+        String helpUser = "help";
+        String deletePassword = "-delete.d";
+        String exitProgramm = "exit";
 
         Masterpassword masterpassword = new Masterpassword();
         createTableIfNotExists();
@@ -25,19 +29,23 @@ public class Main {
         System.out.print("Was möchtest du machen?");
         String userInput = scanner.nextLine();
 
-        if (userInput.equals(safeBefehl)) {
-            handleSavePassword(scanner);
-        } else if (userInput.equals(listLabel)) {
-            listlabelsfuction();
-        } else if (userInput.equals(getPasswordwithlabel)) {
-            System.out.print("Welches ist das Label, dessen Passwort du ausgeben willst?: ");
-            userInput = scanner.nextLine();
-            getPasswordfunction(userInput);
-        }else if (userInput.equals("help")) {
-            help();
-        }
-            scanner.close();
 
+         if (userInput.equals(safeBefehl)) {
+                handleSavePassword(scanner);
+            } else if (userInput.equals(listLabel)) {
+                listlabelsfuction();
+            } else if (userInput.equals(getPasswordwithlabel)) {
+                System.out.print("Welches ist das Label, dessen Passwort du ausgeben willst?: ");
+                userInput = scanner.nextLine();
+                getPasswordfunction(userInput);
+            } else if (userInput.equals(helpUser)) {
+             help();
+            } else if (userInput.equals(deletePassword)) {
+
+            }else if(userInput.equals(exitProgramm)) {
+             System.out.println("Programm wurde erfolgreich beendet.");
+         }
+        scanner.close();
     }
 
     private static void handleMasterPassword(Scanner scanner, Masterpassword masterpassword) throws SQLException {
@@ -62,7 +70,7 @@ public class Main {
         }
     }
 
-    private static void handleSavePassword(Scanner scanner) {
+    private static void handleSavePassword(Scanner scanner) throws SQLException {
         SafeFunction safeFunction = new SafeFunction();
 
         System.out.print("Speichere das Passwort unter einem Namen: ");
@@ -81,60 +89,55 @@ public class Main {
 
         safeFunction.createPasswordTableIfNotExists();
         safeFunction.savePassword(label, nameUser, password, applicationwebsitee);
+        listlabelsfuction();
     }
+    /*
+    public static void createCMDTableIfNotExists() {
+        try (Connection conn = DriverManager.getConnection(URL);
+            Statement stmt = conn.createStatement()) {
 
-    private static void listlabelsfuction() throws SQLException {
-        String sql = """
-                SELECT Label,Password From Password""";
+            String createTableSQL = """
+        CREATE TABLE cmd(
+            cmdID INT PRIMARY KEY NOT NULL,
+            possiblecommands VARCHAR(15),
+            Behaviour VARCHAR(500)
+        )
+        """;
+            stmt.executeUpdate(createTableSQL);
 
+            stmt.executeUpdate("INSERT INTO cmd(cmdID, possiblecommands, Behaviour) VALUES (1,'-s..', 'Speichert das Passwort und die dazugehörigen Angaben z.B. Label, etc.')");
+            stmt.executeUpdate("INSERT INTO cmd(cmdID, possiblecommands, Behaviour) VALUES (2,'-list.l', 'Listet alle Labels mit den dazugehörigen Passwörtern auf.')");
+            stmt.executeUpdate("INSERT INTO cmd(cmdID, possiblecommands, Behaviour) VALUES (3,'-get.g', 'Das zugehörige Label hinschreiben, und das Passwort wird mir angezeigt.')");
+            stmt.executeUpdate("INSERT INTO cmd(cmdID, possiblecommands, Behaviour) VALUES (4,'help', 'Gebe alle Befehle aus, die es gibt und bekomme eine Erklärung.')");
+            stmt.executeUpdate("INSERT INTO cmd(cmdID, possiblecommands, Behaviour) VALUES (5,'-delete.d', 'Lösche ein Passwort')");
+            stmt.executeUpdate("INSERT INTO cmd(cmdID, possiblecommands, Behaviour) VALUES (6,'exit', 'Verlasse das Programm.')");
+
+        } catch (SQLException e) {
+            System.err.println("SQL-Fehler: " + e.getMessage());
+        }
+    }
+*/
+
+    private static void help() {
+        String sql = "SELECT possiblecommands, behaviour FROM cmd";
         try (Connection conn = DriverManager.getConnection(URL);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql)) {
 
-            System.out.printf("| %-40s | %-20s |\n", "Label", "Passwort");
-            System.out.println("-------------------------------------------------------------------");
+            System.out.printf("| %-40s | %-75s |\n", "possiblecommands", "behaviour");
+            System.out.println("-------------------------------------------------------------------------------------------------------------------------");
             while (rs.next()) {
-                String label = rs.getString("Label");
-                String password = rs.getString("Password");
-                System.out.printf("| %-40s | %-20s |\n", label, password);
+                String possiblecommands = rs.getString("possiblecommands");
+                String behaviour = rs.getString("behaviour");
+                System.out.printf("| %-40s | %-75s |\n", possiblecommands, behaviour);
             }
 
-            System.out.println("-------------------------------------------------------------------");
+            System.out.println("-------------------------------------------------------------------------------------------------------------------------");
 
         } catch (SQLException e) {
-            System.err.println("Fehler beim Abrufen der Passwörter");
+            System.err.println("Fehler beim Abrufen der Hilfeseite"+ e.getMessage());
         }
-    }
 
-    private static void getPasswordfunction(String userInput) throws SQLException {
-        String sql = "SELECT Password FROM Password WHERE Label = ?";
-
-        try (Connection conn = DriverManager.getConnection(URL);
-            PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setString(1, userInput);
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                String password = rs.getString("Password");
-                System.out.println("Das Passwort für Label \"" + userInput + "\" ist: " + password);
-            } else {
-                System.out.println("Kein Passwort für das Label \"" + userInput + "\" gefunden.");
-            }
-
-        } catch (SQLException e) {
-            System.err.println("Fehler beim Abrufen des Passworts: " + e.getMessage());
-        }
-    }
-    private static void help( ) {
-        String sql = "SELECT possiblecommands, behaviour FROM cmd";
-
-        try (Connection conn = DriverManager.getConnection(URL);
-            PreparedStatement ps = conn.prepareStatement(sql)) {
-            System.out.println(ps);
-        } catch (SQLException e) {
-            System.err.println("Fehler beim Abrufen des Passworts: " + e.getMessage());
-        }
     }
 }
 

@@ -1,0 +1,41 @@
+package ch.css.inexkasso;
+
+import java.sql.*;
+import java.util.Scanner;
+
+import static ch.css.inexkasso.Masterpassword.createTableIfNotExists;
+
+
+public class ListFunction {
+    private static final String URL = "jdbc:derby:testDB;create=true";
+    private static final String TABLE = "MasterPassword";
+
+    static void listlabelsfuction() {
+        String sql = """
+                SELECT Label,Password From Password""";
+
+        try (Connection conn = DriverManager.getConnection(URL);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql)) {
+
+            System.out.printf("| %-40s | %-20s |\n", "Label", "Passwort");
+            System.out.println("-------------------------------------------------------------------");
+            while (rs.next()) {
+                String label = rs.getString("Label");
+                String password = rs.getString("Password");
+                System.out.printf("| %-40s | %-20s |\n", label, password);
+            }
+
+            System.out.println("-------------------------------------------------------------------");
+
+        } catch (SQLException e) {
+            System.err.println("Fehler beim Abrufen der Passwörter");
+        }
+    }
+
+}
+
+/*
+ * Username: jana123
+ * Passwort: ooo.oreo
+ */
