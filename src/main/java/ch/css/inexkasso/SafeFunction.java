@@ -1,11 +1,11 @@
 package ch.css.inexkasso;
 
 import java.sql.*;
+
 import static ch.css.inexkasso.Main.URL;
 
 
 public class SafeFunction {
-    private static final String TABLE = "MasterPassword";
 
 
     public void createPasswordTableIfNotExists() {

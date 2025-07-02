@@ -7,9 +7,8 @@ import static ch.css.inexkasso.GetPasswordFunction.getPasswordfunction;
 import static ch.css.inexkasso.ListFunction.listlabelsfuction;
 import static ch.css.inexkasso.Masterpassword.*;
 
-
 public class Main {
-     public static final String URL = "jdbc:derby:testDB;create=true";
+    public static final String URL = "jdbc:derby:testDB;create=true";
     public static final String SAFE_BEFEHL = "-s..";
     public static final String LIST_LABEL_BEFEHL = "-list.l";
     public static final String GET_PASSWORDWITHLABEL_BEFEHL = "-get.g";
@@ -18,14 +17,12 @@ public class Main {
     public static final String EXIT_PROGRAMM_BEFEHL = "exit";
 
     public static void main(String[] args) throws SQLException {
-
         Masterpassword masterpassword = new Masterpassword();
         createTableIfNotExists();
 
         Scanner scanner = new Scanner(System.in);
         handleMasterPassword(scanner, masterpassword);
         String userInput;
-
 
         while (true) {
             System.out.print("Was möchtest du machen? ");
@@ -49,7 +46,6 @@ public class Main {
                 System.out.println("Unbekannter Befehl. Mit dem Befehl help kannst du alle Befehle sehen und was ihre Funktion ist.");
             }
         }
-
         scanner.close();
     }
 
@@ -96,7 +92,6 @@ public class Main {
         safeFunction.savePassword(label, nameUser, password, applicationwebsitee);
         listlabelsfuction();
     }
-
 }
 
 /*

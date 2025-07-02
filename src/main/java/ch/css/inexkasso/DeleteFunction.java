@@ -5,7 +5,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Scanner;
+
 import static ch.css.inexkasso.Main.URL;
+
 public class DeleteFunction {
     public static void deletePassword(Scanner scanner) {
         System.out.print("Welches Passwort möchtest du löschen? ");
@@ -14,7 +16,7 @@ public class DeleteFunction {
         String sql = "DELETE FROM Password WHERE Password = ?";
 
         try (Connection conn = DriverManager.getConnection(URL);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, passwordToDelete);
             int rowsAffected = pstmt.executeUpdate();

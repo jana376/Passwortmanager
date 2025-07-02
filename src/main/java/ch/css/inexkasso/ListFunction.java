@@ -8,7 +8,6 @@ import static ch.css.inexkasso.Main.URL;
 
 public class ListFunction {
 
-
     static void listlabelsfuction() {
 
         String sql = """
@@ -35,7 +34,6 @@ public class ListFunction {
             System.err.println("Fehler beim Abrufen der Passwörter");
         }
     }
-
 }
 
 /*
