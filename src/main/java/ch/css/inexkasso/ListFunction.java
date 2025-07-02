@@ -12,18 +12,20 @@ public class ListFunction {
 
     static void listlabelsfuction() {
         String sql = """
-                SELECT Label,Password From Password""";
+                SELECT Label,Password, ApplicationWebsite,NameUser From Password""";
 
         try (Connection conn = DriverManager.getConnection(URL);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql)) {
 
-            System.out.printf("| %-40s | %-20s |\n", "Label", "Passwort");
+            System.out.printf("| %-40s | %-20s |\n", "Label", "Passwort", "ApplicationWebsite", "NameUser");
             System.out.println("-------------------------------------------------------------------");
             while (rs.next()) {
                 String label = rs.getString("Label");
                 String password = rs.getString("Password");
-                System.out.printf("| %-40s | %-20s |\n", label, password);
+                String applicationWebsite = rs.getString("ApplicationWebsite");
+                String name = rs.getString("NameUser");
+                System.out.printf("| %-40s | %-20s |\n", label, password,applicationWebsite,name);
             }
 
             System.out.println("-------------------------------------------------------------------");

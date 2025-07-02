@@ -26,25 +26,32 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         handleMasterPassword(scanner, masterpassword);
-        System.out.print("Was möchtest du machen?");
-        String userInput = scanner.nextLine();
+        String userInput;
 
 
-         if (userInput.equals(safeBefehl)) {
+        while (true) {
+            System.out.print("Was möchtest du machen? ");
+            userInput = scanner.nextLine();
+            if (userInput.equals(safeBefehl)) {
                 handleSavePassword(scanner);
             } else if (userInput.equals(listLabel)) {
                 listlabelsfuction();
             } else if (userInput.equals(getPasswordwithlabel)) {
                 System.out.print("Welches ist das Label, dessen Passwort du ausgeben willst?: ");
-                userInput = scanner.nextLine();
-                getPasswordfunction(userInput);
+                String label = scanner.nextLine();
+                getPasswordfunction(label);
             } else if (userInput.equals(helpUser)) {
-             help();
+                help();
             } else if (userInput.equals(deletePassword)) {
 
-            }else if(userInput.equals(exitProgramm)) {
-             System.out.println("Programm wurde erfolgreich beendet.");
-         }
+            } else if (userInput.equals(exitProgramm)) {
+                System.out.println("Programm wurde erfolgreich beendet.");
+                break;
+            } else {
+                System.out.println("Unbekannter Befehl. Gib 'help' ein für alle Optionen.");
+            }
+        }
+
         scanner.close();
     }
 
