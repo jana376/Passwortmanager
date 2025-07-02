@@ -4,11 +4,10 @@ import java.sql.*;
 import java.util.Scanner;
 
 import static ch.css.inexkasso.Masterpassword.createTableIfNotExists;
-
+import static ch.css.inexkasso.Main.URL;
 
 public class ListFunction {
-    private static final String URL = "jdbc:derby:testDB;create=true";
-    private static final String TABLE = "MasterPassword";
+
 
     static void listlabelsfuction() {
 

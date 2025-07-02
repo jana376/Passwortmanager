@@ -1,13 +1,10 @@
 package ch.css.inexkasso;
 
 import java.sql.*;
-import java.util.Scanner;
-
-import static ch.css.inexkasso.ListFunction.listlabelsfuction;
+import static ch.css.inexkasso.Main.URL;
 
 
 public class SafeFunction {
-    private static final String URL = "jdbc:derby:testDB;create=true";
     private static final String TABLE = "MasterPassword";
 
 

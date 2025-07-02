@@ -1,9 +1,9 @@
 package ch.css.inexkasso;
 
 import java.sql.*;
-
+import static ch.css.inexkasso.Main.URL;
 public class Masterpassword {
-    private static final String URL = "jdbc:derby:testDB;create=true";
+
     private static final String TABLE = "MasterPassword";
 
 

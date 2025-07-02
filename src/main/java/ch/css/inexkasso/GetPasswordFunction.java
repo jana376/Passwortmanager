@@ -1,9 +1,9 @@
 package ch.css.inexkasso;
 
 import java.sql.*;
-
+import static ch.css.inexkasso.Main.URL;
 public class GetPasswordFunction {
-    private static final String URL = "jdbc:derby:testDB;create=true";
+
 
     static void getPasswordfunction(String userInput) throws SQLException {
         String sql = "SELECT Password FROM Password WHERE Label = ?";
