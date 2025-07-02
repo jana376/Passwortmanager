@@ -19,29 +19,29 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         handleMasterPassword(scanner, masterpassword);
+        help();
         askWhatUserWantsToDo(scanner);
         scanner.close();
     }
-
 
     private static void askWhatUserWantsToDo(Scanner scanner) {
         String userInput;
         while (true) {
             System.out.print("Was möchtest du machen? ");
             userInput = scanner.nextLine();
-            if (userInput.equals(SAFE_BEFEHL)) {
+            if (userInput.equals(SAFE_COMMAND)) {
                 handleSavePassword(scanner);
-            } else if (userInput.equals(LIST_LABEL_BEFEHL)) {
+            } else if (userInput.equals(LIST_LABEL_COMMAND)) {
                 listlabelsfuction();
-            } else if (userInput.equals(GET_PASSWORDWITHLABEL_BEFEHL)) {
+            } else if (userInput.equals(GET_PASSWORD_WITH_LABEL_COMMAND)) {
                 System.out.print("Welches ist das Label, dessen Passwort du ausgeben willst?: ");
                 String label = scanner.nextLine();
                 getPasswordfunction(label);
-            } else if (userInput.equals(HELP_USER_BEFEHL)) {
+            } else if (userInput.equals(HELP_USER_COMMAND)) {
                 help();
-            } else if (userInput.equals(DELETE_PASSWORD_BEFEHL)) {
+            } else if (userInput.equals(DELETE_PASSWORD_COMMAND)) {
                 deletePassword(scanner);
-            } else if (userInput.equals(EXIT_PROGRAMM_BEFEHL)) {
+            } else if (userInput.equals(EXIT_PROGRAMM_COMMAND)) {
                 System.out.println("Programm wurde erfolgreich beendet.");
                 break;
             } else {
