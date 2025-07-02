@@ -10,7 +10,6 @@ import static ch.css.inexkasso.Masterpassword.*;
 
 public class Main {
     private static final String URL = "jdbc:derby:testDB;create=true";
-    private static final String TABLE = "MasterPassword";
 
     public static void main(String[] args) throws SQLException {
 
@@ -43,7 +42,7 @@ public class Main {
             } else if (userInput.equals(helpUser)) {
                 help();
             } else if (userInput.equals(deletePassword)) {
-
+                deletePassword(scanner);
             } else if (userInput.equals(exitProgramm)) {
                 System.out.println("Programm wurde erfolgreich beendet.");
                 break;
@@ -102,8 +101,8 @@ public class Main {
     private static void help() {
         String sql = "SELECT possiblecommands, behaviour FROM cmd";
         try (Connection conn = DriverManager.getConnection(URL);
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql)) {
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
 
             System.out.printf("| %-40s | %-75s |\n", "possiblecommands", "behaviour");
             System.out.println("-------------------------------------------------------------------------------------------------------------------------");
@@ -116,11 +115,34 @@ public class Main {
             System.out.println("-------------------------------------------------------------------------------------------------------------------------");
 
         } catch (SQLException e) {
-            System.err.println("Fehler beim Abrufen der Hilfeseite"+ e.getMessage());
+            System.err.println("Fehler beim Abrufen der Hilfeseite" + e.getMessage());
         }
+    }
 
+    private static void deletePassword(Scanner scanner) {
+        System.out.print("Welches Passwort möchtest du löschen? ");
+        String passwordToDelete = scanner.nextLine();
+
+        String sql = "DELETE FROM Password WHERE Password = ?";
+
+        try (Connection conn = DriverManager.getConnection(URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, passwordToDelete);
+            int rowsAffected = pstmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Passwort erfolgreich gelöscht.");
+            } else {
+                System.out.println("Kein Eintrag mit diesem Passwort gefunden.");
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Fehler beim Löschen des Passworts: " + e.getMessage());
+        }
     }
 }
+
 
 /*
  * Username: jana123
