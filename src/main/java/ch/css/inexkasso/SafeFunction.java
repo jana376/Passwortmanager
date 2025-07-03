@@ -60,7 +60,6 @@ public class SafeFunction {
 
         System.out.print("Wie lautet dein Passwort dort?: ");
         String password = scanner.nextLine();
-        String encryptedPassword = cryptoPassword.encrypt(password);
 
         System.out.print("Wie heisst die Website oder Application?: ");
         String applicationwebsitee = scanner.nextLine();
