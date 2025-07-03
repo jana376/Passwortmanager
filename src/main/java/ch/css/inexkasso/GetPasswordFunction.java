@@ -2,15 +2,16 @@ package ch.css.inexkasso;
 
 import java.sql.*;
 
+import static ch.css.inexkasso.Constant.SQL_GET;
 import static ch.css.inexkasso.Constant.URL;
+
 public class GetPasswordFunction {
 
 
     static void getPasswordfunction(String userInput) {
-        String sql = "SELECT Password FROM Password WHERE Label = ?";
 
         try (Connection conn = DriverManager.getConnection(URL);
-            PreparedStatement ps = conn.prepareStatement(sql)) {
+            PreparedStatement ps = conn.prepareStatement(SQL_GET)) {
 
             ps.setString(1, userInput);
             ResultSet rs = ps.executeQuery();

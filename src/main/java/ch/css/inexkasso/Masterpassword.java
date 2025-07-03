@@ -3,21 +3,22 @@ package ch.css.inexkasso;
 import java.sql.*;
 import java.util.Scanner;
 
-import static ch.css.inexkasso.Constant.URL;
+import static ch.css.inexkasso.Constant.*;
+import static javax.accessibility.AccessibleRole.TABLE;
 
 public class Masterpassword {
 
-    private static final String TABLE = "MasterPassword";
+
 
 
     public static void createTableIfNotExists() {
-        String sql = "CREATE TABLE " + TABLE + " (" +
+        String SQL_CREATE_TABLE_MASTERPASSWORD = "CREATE TABLE " + TABLE + " (" +
                 "MasterpasswordId INT PRIMARY KEY, " +
                 "Username VARCHAR(255), " +
                 "Masterpassword VARCHAR(255))";
         try (Connection conn = DriverManager.getConnection(URL);
             Statement stmt = conn.createStatement()) {
-            stmt.executeUpdate(sql);
+            stmt.executeUpdate(SQL_CREATE_TABLE_MASTERPASSWORD);
         } catch (SQLException e) {
             if (!"X0Y32".equals(e.getSQLState())) {
                 System.err.println("Fehler beim Erstellen der Tabelle");

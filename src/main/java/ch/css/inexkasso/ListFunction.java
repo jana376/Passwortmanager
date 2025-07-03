@@ -3,19 +3,18 @@ package ch.css.inexkasso;
 import java.sql.*;
 import java.util.Scanner;
 
-import static ch.css.inexkasso.Masterpassword.createTableIfNotExists;
+import static ch.css.inexkasso.Constant.SQL_LIST;
 import static ch.css.inexkasso.Constant.URL;
 
 public class ListFunction {
 
-    static void listlabelsfuction() {
 
-        String sql = """
-                SELECT Label,Password, ApplicationWebsite,NameUser From Password""";
+
+    static void listlabelsfuction() {
 
         try (Connection conn = DriverManager.getConnection(URL);
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql)) {
+            ResultSet rs = stmt.executeQuery(SQL_LIST)) {
 
             System.out.printf("| %-40s | %-20s | %-40s | %-20s |\n", "Label", "Passwort", "ApplicationWebsite", "Username");
 

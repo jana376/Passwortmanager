@@ -3,34 +3,23 @@ package ch.css.inexkasso;
 import java.sql.*;
 import java.util.Scanner;
 
+import static ch.css.inexkasso.Constant.*;
 import static ch.css.inexkasso.ListFunction.listlabelsfuction;
-import static ch.css.inexkasso.Constant.URL;
 
 
 public class SafeFunction {
-
-
     public void createPasswordTableIfNotExists() {
-        String sql = """
-                CREATE TABLE Password(
-                PasswordId INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-                Label VARCHAR(255),
-                Password VARCHAR(255),
-                ApplicationWebsite VARCHAR(255),
-                NameUser VARCHAR(255)
-                )""";
 
         try (Connection conn = DriverManager.getConnection(URL);
             Statement stmt = conn.createStatement()) {
-            stmt.executeUpdate(sql);
+            stmt.executeUpdate(SQL_NON_EXIST_TABLE);
         } catch (SQLException e) {
             e.getSQLState();
         }
     }
 
-    public void savePassword(String label, String nameUser, String password, String applicationwebsitee) {
-        String sql = "INSERT INTO Password (Label, Password, ApplicationWebsite, NameUser) VALUES (?, ?, ?, ?)";
-        try (Connection conn = DriverManager.getConnection(URL); PreparedStatement ps = conn.prepareStatement(sql)) {
+    public static void savePassword(String label, String nameUser, String password, String applicationwebsitee) {
+        try (Connection conn = DriverManager.getConnection(URL); PreparedStatement ps = conn.prepareStatement(SQL_SAFE)) {
 
             ps.setString(1, label);
             ps.setString(2, password);
@@ -67,7 +56,7 @@ public class SafeFunction {
         System.out.println("Danke! Die Daten wurden gespeichert.");
 
         safeFunction.createPasswordTableIfNotExists();
-        safeFunction.savePassword(label, nameUser, password, applicationwebsitee);
+        savePassword(label, nameUser, password, applicationwebsitee);
         listlabelsfuction();
     }
 }
