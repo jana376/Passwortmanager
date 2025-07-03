@@ -2,11 +2,10 @@ package ch.css.inexkasso;
 
 import java.sql.*;
 
-import static ch.css.inexkasso.Constant.SQL_GET;
 import static ch.css.inexkasso.Constant.URL;
+import static ch.css.inexkasso.SQLStrings.SQL_GET;
 
 public class GetPasswordFunction {
-
 
     static void getPasswordfunction(String userInput) {
 

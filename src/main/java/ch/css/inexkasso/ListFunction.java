@@ -3,8 +3,9 @@ package ch.css.inexkasso;
 import java.sql.*;
 import java.util.Scanner;
 
-import static ch.css.inexkasso.Constant.SQL_LIST;
+
 import static ch.css.inexkasso.Constant.URL;
+import static ch.css.inexkasso.SQLStrings.SQL_LIST;
 
 public class ListFunction {
 

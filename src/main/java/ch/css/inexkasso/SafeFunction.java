@@ -5,6 +5,8 @@ import java.util.Scanner;
 
 import static ch.css.inexkasso.Constant.*;
 import static ch.css.inexkasso.ListFunction.listlabelsfuction;
+import static ch.css.inexkasso.SQLStrings.SQL_NON_EXIST_TABLE;
+import static ch.css.inexkasso.SQLStrings.SQL_SAFE;
 
 
 public class SafeFunction {
