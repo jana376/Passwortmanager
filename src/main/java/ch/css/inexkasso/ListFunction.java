@@ -1,42 +1,33 @@
 package ch.css.inexkasso;
 
 import java.sql.*;
-import java.util.Scanner;
-
 
 import static ch.css.inexkasso.Constant.URL;
 import static ch.css.inexkasso.SQLStrings.SQL_LIST;
 
 public class ListFunction {
-
-
-
     static void listlabelsfuction() {
 
         try (Connection conn = DriverManager.getConnection(URL);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(SQL_LIST)) {
-
-            System.out.printf("| %-40s | %-20s | %-40s | %-20s |\n", "Label", "Passwort", "ApplicationWebsite", "Username");
-
-            System.out.println("--------------------------------------------------------------------------------------------------------------------------------------");
-            while (rs.next()) {
-                String label = rs.getString("Label");
-                String password = rs.getString("Password");
-                String applicationWebsite = rs.getString("ApplicationWebsite");
-                String name = rs.getString("NameUser");
-                System.out.printf("| %-40s | %-20s | %-40s | %-20s |\n", label, cryptoPassword.decrypt(cryptoPassword.encrypt(password)), applicationWebsite, name);
-            }
-
-            System.out.println("--------------------------------------------------------------------------------------------------------------------------------------");
-
+            passwortOutputTable(rs);
         } catch (SQLException e) {
-            System.err.println("Fehler beim Abrufen der Passwörter");
+            System.err.println("Fehler beim Abrufen der Labels");
         }
     }
-}
 
-/*
- * Username: jana123
- * Passwort: ooo.oreo
- */
+    private static void passwortOutputTable(ResultSet rs) throws SQLException {
+        System.out.printf("| %-40s | %-20s | %-40s | %-20s |\n", "Label", "ApplicationWebsite", "Username", "Password");
+
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------");
+        while (rs.next()) {
+            String label = rs.getString("Label");
+            String applicationWebsite = rs.getString("ApplicationWebsite");
+            String name = rs.getString("NameUser");
+            String password = rs.getString("Password");
+            System.out.printf("| %-40s | %-20s | %-40s | %-20s |\n", label, applicationWebsite, name, password);
+        }
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------");
+    }
+}
