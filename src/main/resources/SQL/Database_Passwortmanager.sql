@@ -29,3 +29,4 @@ INSERT into commands(cmdID, possiblecommands, Behaviour) VALUES (7, 'b.z', 'Zur√
 
 
 SELECT * FROM MasterPassword;
+

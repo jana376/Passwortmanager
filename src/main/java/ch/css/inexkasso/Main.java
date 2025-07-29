@@ -18,7 +18,7 @@ public class Main {
         createTableIfNotExists();
 
         Scanner scanner = new Scanner(System.in);
-        handleMasterPassword(scanner, masterpassword);
+        masterpassword.handleMasterPassword(scanner);
         help();
         askWhatUserWantsToDo(scanner);
         scanner.close();

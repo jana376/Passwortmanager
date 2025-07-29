@@ -20,26 +20,6 @@ public class SafeFunction {
         }
     }
 
-    public static void savePassword(String label, String nameUser, String password, String applicationwebsitee) {
-        try (Connection conn = DriverManager.getConnection(URL); PreparedStatement ps = conn.prepareStatement(SQL_SAFE)) {
-
-            ps.setString(1, label);
-            ps.setString(2, password);
-            ps.setString(3, applicationwebsitee);
-            ps.setString(4, nameUser);
-            int rows = ps.executeUpdate();
-
-            if (rows > 0) {
-                System.out.println("Passwort wurde erfolgreich gespeichert.");
-            } else {
-                System.out.println("Fehler beim Speichern des Passworts.");
-            }
-
-        } catch (SQLException e) {
-            System.err.println("Fehler bei Datenbankverbindung");
-
-        }
-    }
     static void handleSavePassword(Scanner scanner) {
         SafeFunction safeFunction = new SafeFunction();
 
@@ -60,6 +40,27 @@ public class SafeFunction {
         safeFunction.createPasswordTableIfNotExists();
         savePassword(label, nameUser, password, applicationwebsitee);
         listlabelsfuction();
+    }
+
+    public static void savePassword(String label, String nameUser, String password, String applicationwebsitee) {
+        try (Connection conn = DriverManager.getConnection(URL); PreparedStatement ps = conn.prepareStatement(SQL_SAFE)) {
+
+            ps.setString(1, label);
+            ps.setString(2, password);
+            ps.setString(3, applicationwebsitee);
+            ps.setString(4, nameUser);
+            int rows = ps.executeUpdate();
+
+            if (rows > 0) {
+                System.out.println("Passwort wurde erfolgreich gespeichert.");
+            } else {
+                System.out.println("Fehler beim Speichern des Passworts.");
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Fehler bei Datenbankverbindung");
+
+        }
     }
 }
 
