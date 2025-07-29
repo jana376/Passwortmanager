@@ -47,10 +47,6 @@ public class Masterpassword {
         }
     }
 
-
-
-
-
     public boolean checkCredentials(String inputUsername, String inputPassword) throws SQLException {
         String sql = "SELECT Username, Masterpassword FROM " + TABLE + " WHERE MasterpasswordId = 1";
         try (Connection conn = DriverManager.getConnection(URL);
@@ -101,7 +97,6 @@ public class Masterpassword {
         }
     }
 
-
     public boolean isMasterPasswordStored() throws SQLException {
         String sql = "SELECT COUNT(*) FROM " + TABLE + " WHERE MasterpasswordId = 1";
         try (Connection conn = DriverManager.getConnection(URL);
@@ -112,13 +107,6 @@ public class Masterpassword {
         }
     }
 
-    void deleteAllPasswords() throws SQLException {
-        String sql = "DELETE FROM Password";
-        try (Connection conn = DriverManager.getConnection(URL);
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.executeUpdate();
-        }
-    }
 
 }
 /*
