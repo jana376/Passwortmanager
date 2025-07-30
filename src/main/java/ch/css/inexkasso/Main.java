@@ -14,15 +14,18 @@ import static ch.css.inexkasso.SafeFunction.*;
 public class Main {
 
     public static void main(String[] args) throws SQLException {
-        Masterpassword masterpassword = new Masterpassword();
-        createTableIfNotExists();
-
         Scanner scanner = new Scanner(System.in);
-        masterpassword.handleMasterPassword(scanner);
-        help();
-        askWhatUserWantsToDo(scanner);
-        scanner.close();
+        Masterpassword mp = new Masterpassword();
+
+        mp.createTableIfNotExists();
+        mp.handleMasterPassword(scanner);
+
+        if (mp.getCurrentUsername() != null) {
+            mp.savePassword("Google", "meinPasswort123", "www.google.com");
+            mp.showPasswordsForUser();
+        }
     }
+
 
     private static void askWhatUserWantsToDo(Scanner scanner) {
         String userInput;
