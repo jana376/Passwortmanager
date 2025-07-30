@@ -64,26 +64,24 @@ public class Masterpassword {
     void handleMasterPassword(Scanner scanner) throws SQLException {
         String username = "";
         String masterPassword = "";
+        String choice = " ";
         if (!isMasterPasswordStored()) {
-            insertMasterPassword(username, masterPassword);
-            System.out.println("Datensatz erfolgreich eingefügt.");
+            System.out.println("Noch kein Master-Passwort gespeichert. Bitte registrieren.");
         }
         System.out.print("Möchtest du dich registrieren? (y/n): ");
-        if (scanner.next().toLowerCase().equals("y")) {
-            System.out.print("Bitte gib einen Username ein: ");
-            username = scanner.nextLine().trim();
-
-            System.out.print("Bitte gib dein Master-Passwort ein: ");
-            masterPassword = scanner.nextLine().trim();
+         choice = scanner.nextLine().trim().toLowerCase();
+        if (choice.equals("y")) {
+            promptCredentials(scanner);
 
             insertMasterPassword(username, masterPassword);
             System.out.println("Du hast dich erfolgreich registriert.");
-        } else if (scanner.next().toLowerCase().equals("n")) {
-            checkCredentials(username, masterPassword);
 
-        if (checkCredentials(username, masterPassword)) {
-            System.out.println("Hallo " + username + ", du bist erfolgreich angemeldet worden. :)");
-        } else {
+        } else if (choice.equals("n")) {
+            promptCredentials( scanner);
+
+            if (checkCredentials(username, masterPassword)) {
+                System.out.println("Hallo " + username + ", du bist erfolgreich angemeldet worden. :)");
+            } else {
             while (!checkCredentials(username, masterPassword)) {
                 System.out.println("Unbekannter Benutzer – möchtest du dich neu registrieren? (y/n)");
                 String antwort = scanner.nextLine().trim();
@@ -93,11 +91,7 @@ public class Masterpassword {
                     System.out.println("Neuer Benutzer registriert.");
                     return;
                 } else if (antwort.equalsIgnoreCase("n")) {
-                    System.out.print("Bitte gib einen Username ein: ");
-                    username = scanner.nextLine().trim();
-
-                    System.out.print("Bitte gib dein Master-Passwort ein: ");
-                    masterPassword = scanner.nextLine().trim();
+                    promptCredentials(scanner);
                 }
             }
         }
@@ -114,6 +108,17 @@ public class Masterpassword {
             return rs.getInt(1) > 0;
         }
     }
+
+    private String[] promptCredentials(Scanner scanner) {
+        System.out.print("Bitte gib deinen Benutzernamen ein: ");
+        String user = scanner.nextLine().trim();
+
+        System.out.print("Bitte gib ein Masterpasswort ein: ");
+        String pass = scanner.nextLine().trim();
+
+        return new String[]{user, pass};
+    }
+
 }
 /*
  * Username: jana123
