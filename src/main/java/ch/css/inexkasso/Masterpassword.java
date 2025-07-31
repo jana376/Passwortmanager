@@ -61,18 +61,22 @@ public class Masterpassword {
         }
     }
 
-
     void handleMasterPassword(Scanner scanner) throws SQLException {
         String username = "";
         String masterPassword = "";
-        String choice = " ";
+        String choice = "";
 
         if (!isMasterPasswordStored()) {
             System.out.println("Noch kein Master-Passwort gespeichert. Bitte registrieren.");
         }
-
-        System.out.print("Möchtest du dich registrieren? (y/n): ");
-        choice = scanner.nextLine().trim().toLowerCase();
+        while (true) {
+            System.out.print("Möchtest du dich registrieren? (y/n): ");
+            choice = scanner.nextLine().trim().toLowerCase();
+            if (choice.equals("y") || choice.equals("n")) {
+                break;
+            }
+            System.out.println("Ungültige Eingabe! Bitte gib 'y' oder 'n' ein.");
+        }
 
         if (choice.equals("y")) {
             String[] credentials = promptCredentials(scanner);
@@ -82,7 +86,7 @@ public class Masterpassword {
             insertMasterPassword(username, masterPassword);
             System.out.println("Du hast dich erfolgreich registriert.");
 
-        } else if (choice.equals("n")) {
+        } else {
             String[] credentials = promptCredentials(scanner);
             username = credentials[0];
             masterPassword = credentials[1];
@@ -90,25 +94,28 @@ public class Masterpassword {
             if (checkCredentials(username, masterPassword)) {
                 System.out.println("Hallo " + username + ", du bist erfolgreich angemeldet worden. :)");
             } else {
-                System.out.println("Ungültige Eingabe");
-                System.out.println("Möchtest du dich neu registrieren? (y/n)");
-                credentials = promptCredentials(scanner);
-                username = credentials[0];
-                masterPassword = credentials[1];
-                while (!checkCredentials(username, masterPassword)) {
-                    String antwort = scanner.nextLine().trim();
+                System.out.println("Benutzer nicht gefunden.");
+                while (true) {
+                    System.out.print("Möchtest du dich neu registrieren? (y/n): ");
+                    String antwort = scanner.nextLine().trim().toLowerCase();
 
-                    if (antwort.equalsIgnoreCase("y")) {
+                    if (antwort.equals("y")) {
                         insertMasterPassword(username, masterPassword);
                         System.out.println("Neuer Benutzer registriert.");
                         return;
-                    } else if (antwort.equalsIgnoreCase("n")) {
+                    } else if (antwort.equals("n")) {
                         credentials = promptCredentials(scanner);
                         username = credentials[0];
                         masterPassword = credentials[1];
+
+                        if (checkCredentials(username, masterPassword)) {
+                            System.out.println("Hallo " + username + ", du bist erfolgreich angemeldet worden. :)");
+                            return;
+                        }
+                    } else {
+                        System.out.println("Ungültige Eingabe. Bitte 'y' oder 'n' eingeben.");
                     }
                 }
-                System.out.println("Hallo " + username + ", du bist erfolgreich angemeldet worden. :)");
             }
         }
     }
