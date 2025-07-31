@@ -91,7 +91,7 @@ public class Masterpassword {
                 System.out.println("Hallo " + username + ", du bist erfolgreich angemeldet worden. :)");
             } else {
                 System.out.println("Ungültige Eingabe");
-                    System.out.println("Möchtest du dich neu registrieren? (y/n)");
+                System.out.println("Möchtest du dich neu registrieren? (y/n)");
                 credentials = promptCredentials(scanner);
                 username = credentials[0];
                 masterPassword = credentials[1];

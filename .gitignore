@@ -2,7 +2,8 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-testDB/
+testDB/log
+testDB/seg0
 ### IntelliJ IDEA ###
 .idea/modules.xml
 .idea/jarRepositories.xml
@@ -11,6 +12,10 @@ testDB/
 *.iws
 *.iml
 *.ipr
+*.lck
+*.dat
+*.ctrl
+*.log
 
 ### Eclipse ###
 .apt_generated
