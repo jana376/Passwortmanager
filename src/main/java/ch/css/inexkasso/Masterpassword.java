@@ -42,7 +42,7 @@ public class Masterpassword {
             if (rs.next()) {
                 return rs.getInt(1) + 1;
             } else {
-                return 1; // Erste ID
+                return 1;
             }
         }
     }
