@@ -61,7 +61,7 @@ ACTUNG: Leerzeichen werden bei eingegebenen Befehlen beachtet, das heisst wenn m
 ---
 ## Buy me a coffee
 
-Whether you use this project, have learned something from it, or just like it, please consider supporting it by buying me a coffee, so I can dedicate more time on open-source projects like this :)
+Bitte schick mir Geld, weil Lehrlingslohn.... Einfach auf das Bild klicken und Sie werden auf Paypal weiter geleitet
 
 <a href="https://www.paypal.com/ch/digital-wallet/send-receive-money/send-money" target="_blank"><img src="https://i.ytimg.com/vi/KMdjT9RTgqw/hqdefault.jpg" alt="Schick mir bitte Geld." style="height: auto !important;width: auto !important;" ></a>
 
