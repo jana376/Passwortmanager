@@ -56,3 +56,13 @@ WICHTIG: Das Passwort wird verschlüsselt und es ist nicht mehr änderbar. Wenn 
 Nach jeder fertigen Eingabe muss die Entertaste gedrückt werden.
 
 ACTUNG: Leerzeichen werden bei eingegebenen Befehlen beachtet, das heisst wenn man "safe " eingibt, wird der Befehl nicht erkannt.
+
+
+---
+## Buy me a coffee
+
+Whether you use this project, have learned something from it, or just like it, please consider supporting it by buying me a coffee, so I can dedicate more time on open-source projects like this :)
+
+<a href="https://www.buymeacoffee.com/igorantun" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
+
+---
