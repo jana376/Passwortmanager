@@ -11,18 +11,19 @@ Dann gibt man seine Anmeldedaten ein. Falls die Daten falsch eingegeben werden, 
 Nachdem man sich registriert/angemeldet hat, wir eine Tabelle eingezeigt, in der stehen die Befehle die zur Verfügung stehen
 
 
-| possiblecommands                    | behaviour                                                              |
 ----------------------------------------------------------------------------------------------------------------
-| safe                                | Speichert das Passwort und die dazugehörigen Angaben z.B. Label, etc.  |
+-> safe                                | Speichert das Passwort und die dazugehörigen Angaben z.B. Label, etc.  |
 
-| list                                | Listet alle Labels mit den dazugehörigen Passwörtern auf.              |
+-> list                                | Listet alle Labels mit den dazugehörigen Passwörtern auf.              |
 
-| get                                 | Zeigt das Passwort zu einem gegebenen Label an.                        |
+-> get                                 | Zeigt das Passwort zu einem gegebenen Label an.                        |
 
-| help                                | Gibt alle Befehle aus und erklärt sie.                                 |
+-> help                                | Gibt alle Befehle aus und erklärt sie.                                 |
 
-| delete                              | Löscht ein Passwort.                                                   |
+-> delete                              | Löscht ein Passwort.                                                   |
 
-| exit                                | Beendet das Programm.                                                  |
+-> exit                                | Beendet das Programm.                                                  |
 
 Nach jeder fertigen Eingabe muss die Entertaste gedrückt werden.
+
+ACTUNG: Leerzeichen werden bei eingegebenen Befehlen beachtet, das heisst wenn man "safe " eingibt, wird der Befehl nicht erkannt.
