@@ -1,29 +1,45 @@
-Voraussetzungen
-- IntelliJ IDEA Ultimate
-- JDK 21 
-- Jakarta EE
+# Passwortmanager
 
-Ausführung:
+Als Abschlussprojekt des Semesters darf ich ein Passwortmanager machen, der Passwörter speichern, ausgeben und löschen kann. Die Passwörter werden verschlüsselt und in einer Datenbank gespeichert.
+
+
+
+## Getting Started
+
+Mit dieser Anleitung, bekommen sie gezielte Anweisungen, um den Passwortmanager lokal auf ihrem Rechner installieren zu können.
+
+### Vorraussetzungen
+
+Die Vorraussetzungen um den Passwortmanager benutzen zu können sind: 
+
+- IntelliJ IDEA Ultimate, https://www.jetbrains.com/idea/download/?section=windows
+- JDK 21, https://www.oracle.com/java/technologies/downloads/
+- Jakarta EE, https://jakarta.ee/release/10/
+
+### Installing
+
+Um den Passwortmanager auf ihrem lokalen Gerät abszuspielen, müssen Sie nur die ZIP Datei extrahieren und dann können Sie los legen.
+
+##Ausführung:
 
 Main starten
 
-Registrieren
-
+###Registrieren
     Wenn es das erste Mal ist, wo man den passwort manager benutzt, dann wird man gefragt ob man sich registrieren möchte, dort kann man einfach ein 'y' eingeben und die ENTER-Taste drücken.
     Dann wird man nach einem Username und Passwort gefragt, dort kann man die Daten einfügen, auch wieder indem man die Zeichenkette eingibt und ENTER drückt.
 
-Anmelden
+###Anmelden
 
-    Wenn man schon registriert ist und man sich anmelden möchte, gibt man 'n' ein, wenn gefragt wird ob man sich registrieren möchte.
-    Dann gibt man seine Anmeldedaten ein. Falls die Daten falsch eingegeben werden, dann geht es wieder von vorne los.
+Wenn man schon registriert ist und man sich anmelden möchte, gibt man 'n' ein, wenn gefragt wird ob man sich registrieren möchte.
+Dann gibt man seine Anmeldedaten ein. Falls die Daten falsch eingegeben werden, dann geht es wieder von vorne los.
 
 Nachdem man sich registriert/angemeldet hat, wir eine Tabelle eingezeigt, in der stehen die Befehle die zur Verfügung stehen
 
 WICHTIG: Das Passwort wird verschlüsselt und es ist nicht mehr änderbar. Wenn man es vergisst sind die Daten verloren.
 
 ----------------------------------------------------------------------------------------------------------------
-
-Befehle und Aktionen:
+  
+###Befehle und Aktionen:
 
 -> safe                                | Speichert das Passwort und die dazugehörigen Angaben z.B. Label, etc.  |
 
