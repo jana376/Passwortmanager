@@ -13,7 +13,7 @@ Mit dieser Anleitung, bekommen sie gezielte Anweisungen, um den Passwortmanager 
 Die Vorraussetzungen um den Passwortmanager benutzen zu können sind: 
 
 - IntelliJ IDEA Ultimate, https://www.jetbrains.com/idea/download/?section=windows
-- JDK 21, https://www.oracle.com/java/technologies/downloads/
+- JDK 23, https://www.oracle.com/java/technologies/downloads/#jdk24-windows
 - Jakarta EE, https://jakarta.ee/release/10/
 
 ### Installieren
