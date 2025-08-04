@@ -20,15 +20,15 @@ Die Vorraussetzungen um den Passwortmanager benutzen zu können sind:
 
 Um den Passwortmanager auf ihrem lokalen Gerät abszuspielen, müssen Sie nur die ZIP Datei extrahieren und dann können Sie los legen.
 
-###Ausführung:
+### Ausführung:
 
 Main starten
 
-####Registrieren
-    Wenn es das erste Mal ist, wo man den passwort manager benutzt, dann wird man gefragt ob man sich registrieren möchte, dort kann man einfach ein 'y' eingeben und die ENTER-Taste drücken.
-    Dann wird man nach einem Username und Passwort gefragt, dort kann man die Daten einfügen, auch wieder indem man die Zeichenkette eingibt und ENTER drückt.
+#### Registrieren
+Wenn es das erste Mal ist, wo man den passwort manager benutzt, dann wird man gefragt ob man sich registrieren möchte, dort kann man einfach ein 'y' eingeben und die ENTER-Taste drücken.
+Dann wird man nach einem Username und Passwort gefragt, dort kann man die Daten einfügen, auch wieder indem man die Zeichenkette eingibt und ENTER drückt.
 
-####Anmelden
+#### Anmelden
 
 Wenn man schon registriert ist und man sich anmelden möchte, gibt man 'n' ein, wenn gefragt wird ob man sich registrieren möchte.
 Dann gibt man seine Anmeldedaten ein. Falls die Daten falsch eingegeben werden, dann geht es wieder von vorne los.
@@ -39,7 +39,7 @@ WICHTIG: Das Passwort wird verschlüsselt und es ist nicht mehr änderbar. Wenn 
 
 ----------------------------------------------------------------------------------------------------------------
   
-####Befehle und Aktionen:
+#### Befehle und Aktionen:
 
 -> safe                                | Speichert das Passwort und die dazugehörigen Angaben z.B. Label, etc.  |
 
