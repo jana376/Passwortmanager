@@ -1,3 +1,10 @@
+Voraussetzungen
+- IntelliJ IDEA Ultimate
+- JDK 21 
+- Jakarta EE
+
+Ausführung:
+
 Main starten
 
 Wenn es das erste Mal ist, wo man den passwort manager benutzt, dann wird man gefragt ob man sich registrieren möchte, dort kann man einfach ein 'y' eingeben und die ENTER-Taste drücken.
