@@ -41,17 +41,17 @@ WICHTIG: Das Passwort wird verschlüsselt und es ist nicht mehr änderbar. Wenn 
   
 #### Befehle und Aktionen:
 
--> safe                                | Speichert das Passwort und die dazugehörigen Angaben z.B. Label, etc.  |
+- safe   ->  Speichert das Passwort und die dazugehörigen Angaben z.B. Label, etc.  
 
--> list                                | Listet alle Labels mit den dazugehörigen Passwörtern auf.              |
+- list   ->  Listet alle Labels mit den dazugehörigen Passwörtern auf.              
 
--> get                                 | Zeigt das Passwort zu einem gegebenen Label an.                        |
+- get    ->  Zeigt das Passwort zu einem gegebenen Label an.                        
 
--> help                                | Gibt alle Befehle aus und erklärt sie.                                 |
+- help   ->  Gibt alle Befehle aus und erklärt sie.                                 
 
--> delete                              | Löscht ein Passwort.                                                   |
+- delete ->  Löscht ein Passwort.                                                   
 
--> exit                                | Beendet das Programm.                                                  |
+- exit   ->  Beendet das Programm.                                                  
 
 Nach jeder fertigen Eingabe muss die Entertaste gedrückt werden.
 
