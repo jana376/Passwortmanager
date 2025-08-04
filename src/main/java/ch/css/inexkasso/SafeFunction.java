@@ -35,8 +35,6 @@ public class SafeFunction {
         System.out.print("Wie heisst die Website oder Application?: ");
         String applicationwebsitee = scanner.nextLine();
 
-        System.out.println("Danke! Die Daten wurden gespeichert.");
-
         safeFunction.createPasswordTableIfNotExists();
         savePassword(label, nameUser, password, applicationwebsitee);
         listlabelsfuction();

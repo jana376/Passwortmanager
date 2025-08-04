@@ -22,17 +22,6 @@ public class Masterpassword {
         }
     }
 
-    public void insertMasterPassword(String username, String password) throws SQLException {
-        int nextId = getNextMasterpasswordId();
-        String sql = "INSERT INTO Masterpassword (MasterpasswordId, Username, Masterpassword) VALUES (?, ?, ?)";
-        try (Connection conn = DriverManager.getConnection(URL);
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, nextId);
-            stmt.setString(2, username);
-            stmt.setString(3, password);
-            stmt.executeUpdate();
-        }
-    }
 
     public int getNextMasterpasswordId() throws SQLException {
         String sql = "SELECT MAX(MasterpasswordId) FROM Masterpassword";
@@ -62,13 +51,14 @@ public class Masterpassword {
     }
 
     void handleMasterPassword(Scanner scanner) throws SQLException {
-        String username = "";
-        String masterPassword = "";
-        String choice = "";
+        String username;
+        String masterPassword;
+        String choice;
 
         if (!isMasterPasswordStored()) {
             System.out.println("Noch kein Master-Passwort gespeichert. Bitte registrieren.");
         }
+
         while (true) {
             System.out.print("Möchtest du dich registrieren? (y/n): ");
             choice = scanner.nextLine().trim().toLowerCase();
@@ -79,46 +69,51 @@ public class Masterpassword {
         }
 
         if (choice.equals("y")) {
-            String[] credentials = promptCredentials(scanner);
-            username = credentials[0];
-            masterPassword = credentials[1];
+            while (true) {
+                String[] credentials = promptCredentialsSignin(scanner);
+                username = credentials[0];
+                String pass1 = credentials[1];
+                String pass2 = credentials[2];
 
-            insertMasterPassword(username, masterPassword);
-            System.out.println("Du hast dich erfolgreich registriert.");
+                if (pass1.equals(pass2)) {
+                    insertMasterPassword(username, pass1);
+                    System.out.println("Du hast dich erfolgreich registriert.");
+                    break;
+                } else {
+                    System.out.println("Die erste und zweite Eingabe des Passworts stimmt nicht über ein, bitte versuche es noch einmal.");
+                }
+            }
 
         } else {
-            String[] credentials = promptCredentials(scanner);
-            username = credentials[0];
-            masterPassword = credentials[1];
+            while (true) {
+                String[] credentials = promptCredentialsSignUp(scanner);
+                username = credentials[0];
+                masterPassword = credentials[1];
 
-            if (checkCredentials(username, masterPassword)) {
-                System.out.println("Hallo " + username + ", du bist erfolgreich angemeldet worden. :)");
-            } else {
-                System.out.println("Benutzer nicht gefunden.");
-                while (true) {
-                    System.out.print("Möchtest du dich neu registrieren? (y/n): ");
-                    String antwort = scanner.nextLine().trim().toLowerCase();
+                if (checkCredentials(username, masterPassword)) {
+                    System.out.println("Hallo " + username + ", du bist erfolgreich angemeldet worden. :)");
+                    break;
+                } else {
+                    System.out.println("Benutzer nicht gefunden.");
+                    while (true) {
+                        System.out.print("Möchtest du dich neu registrieren? (y/n): ");
+                        String antwort = scanner.nextLine().trim().toLowerCase();
 
-                    if (antwort.equals("y")) {
-                        insertMasterPassword(username, masterPassword);
-                        System.out.println("Neuer Benutzer registriert.");
-                        return;
-                    } else if (antwort.equals("n")) {
-                        credentials = promptCredentials(scanner);
-                        username = credentials[0];
-                        masterPassword = credentials[1];
-
-                        if (checkCredentials(username, masterPassword)) {
-                            System.out.println("Hallo " + username + ", du bist erfolgreich angemeldet worden. :)");
+                        if (antwort.equals("y")) {
+                            insertMasterPassword(username, masterPassword);
+                            System.out.println("Neuer Benutzer registriert.");
                             return;
+                        } else if (antwort.equals("n")) {
+                            break;
+                        } else {
+                            System.out.println("Ungültige Eingabe. Bitte 'y' oder 'n' eingeben.");
                         }
-                    } else {
-                        System.out.println("Ungültige Eingabe. Bitte 'y' oder 'n' eingeben.");
                     }
                 }
             }
         }
     }
+
 
 
     public boolean isMasterPasswordStored() throws SQLException {
@@ -131,16 +126,41 @@ public class Masterpassword {
         }
     }
 
-    private String[] promptCredentials(Scanner scanner) {
+    public void insertMasterPassword(String username, String password) throws SQLException {
+        int nextId = getNextMasterpasswordId();
+        String sql = "INSERT INTO Masterpassword (MasterpasswordId, Username, Masterpassword) VALUES (?, ?, ?)";
+        try (Connection conn = DriverManager.getConnection(URL);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, nextId);
+            stmt.setString(2, username);
+            stmt.setString(3, password);
+            stmt.executeUpdate();
+        }
+    }
+
+    private String[] promptCredentialsSignin(Scanner scanner) {
         System.out.print("Bitte gib deinen Benutzernamen ein: ");
         String user = scanner.nextLine().trim();
 
         System.out.print("Bitte gib ein Masterpasswort ein: ");
-        String pass = scanner.nextLine().trim();
+        String pass1 = scanner.nextLine().trim();
 
-        return new String[]{user, pass};
+        System.out.print("Bitte bestätige das Masterpasswort: ");
+        String pass2 = scanner.nextLine().trim();
+
+
+        return new String[]{user, pass1, pass2};
     }
 
+    private String[] promptCredentialsSignUp(Scanner scanner) {
+        System.out.print("Bitte gib deinen Benutzernamen ein: ");
+        String user = scanner.nextLine().trim();
+
+        System.out.print("Bitte gib ein Masterpasswort ein: ");
+        String pass1 = scanner.nextLine().trim();
+
+        return new String[]{user, pass1};
+    }
 }
 /*
  * Username: jana123

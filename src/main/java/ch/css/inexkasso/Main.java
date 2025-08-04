@@ -29,7 +29,7 @@ public class Main {
         label:
         while (true) {
             System.out.print("Was möchtest du machen? ");
-            userInput = scanner.nextLine();
+            userInput = scanner.nextLine().trim();
             switch (userInput) {
                 case SAFE_COMMAND:
                     handleSavePassword(scanner);
@@ -39,7 +39,7 @@ public class Main {
                     break;
                 case GET_PASSWORD_WITH_LABEL_COMMAND:
                     System.out.print("Welches ist das Label, dessen Passwort du ausgeben willst?: ");
-                    String label = scanner.nextLine();
+                    String label = scanner.nextLine().trim();
                     getPasswordfunction(label);
                     break;
                 case HELP_USER_COMMAND:
@@ -62,4 +62,7 @@ public class Main {
 /*
  * Username: jana123
  * Passwort: ooo.oreo
+ *
+ * Username: tobias123
+ * Passwort: asdf
  */
