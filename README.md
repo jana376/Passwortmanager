@@ -39,7 +39,7 @@ WICHTIG: Das Passwort wird verschlüsselt und es ist nicht mehr änderbar. Wenn 
 
 ----------------------------------------------------------------------------------------------------------------
   
-#### Befehle und Aktionen:
+### Befehle und Aktionen:
 
 - safe   ->  Speichert das Passwort und die dazugehörigen Angaben z.B. Label, etc.  
 
@@ -59,7 +59,7 @@ ACTUNG: Leerzeichen werden bei eingegebenen Befehlen beachtet, das heisst wenn m
 
 
 ---
-## Buy me a coffee
+### Geld spenden
 
 Bitte schick mir Geld, weil Lehrlingslohn.... Einfach auf das Bild klicken und Sie werden auf Paypal weiter geleitet
 
