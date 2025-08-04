@@ -19,6 +19,9 @@ Nachdem man sich registriert/angemeldet hat, wir eine Tabelle eingezeigt, in der
 
 
 ----------------------------------------------------------------------------------------------------------------
+
+Befehle und Aktionen:
+
 -> safe                                | Speichert das Passwort und die dazugehörigen Angaben z.B. Label, etc.  |
 
 -> list                                | Listet alle Labels mit den dazugehörigen Passwörtern auf.              |
