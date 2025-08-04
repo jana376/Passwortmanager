@@ -14,10 +14,15 @@ Nachdem man sich registriert/angemeldet hat, wir eine Tabelle eingezeigt, in der
 | possiblecommands                    | behaviour                                                              |
 ----------------------------------------------------------------------------------------------------------------
 | safe                                | Speichert das Passwort und die dazugehörigen Angaben z.B. Label, etc.  |
+
 | list                                | Listet alle Labels mit den dazugehörigen Passwörtern auf.              |
+
 | get                                 | Zeigt das Passwort zu einem gegebenen Label an.                        |
+
 | help                                | Gibt alle Befehle aus und erklärt sie.                                 |
+
 | delete                              | Löscht ein Passwort.                                                   |
+
 | exit                                | Beendet das Programm.                                                  |
 
 Nach jeder fertigen Eingabe muss die Entertaste gedrückt werden.
