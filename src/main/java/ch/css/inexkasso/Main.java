@@ -14,8 +14,9 @@ import static ch.css.inexkasso.SafeFunction.*;
 public class Main {
 
     public static void main(String[] args) throws SQLException {
-        Masterpassword masterpassword = new Masterpassword();
         createTableIfNotExists();
+        Masterpassword masterpassword = new Masterpassword();
+
 
         Scanner scanner = new Scanner(System.in);
         masterpassword.handleMasterPassword(scanner);
