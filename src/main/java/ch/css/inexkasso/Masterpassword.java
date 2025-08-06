@@ -22,7 +22,6 @@ public class Masterpassword {
         }
     }
 
-
     public int getNextMasterpasswordId() throws SQLException {
         String sql = "SELECT MAX(MasterpasswordId) FROM Masterpassword";
         try (Connection conn = DriverManager.getConnection(URL);
@@ -114,8 +113,6 @@ public class Masterpassword {
         }
     }
 
-
-
     public boolean isMasterPasswordStored() throws SQLException {
         String sql = "SELECT COUNT(*) FROM " + TABLE + " WHERE MasterpasswordId = 1";
         try (Connection conn = DriverManager.getConnection(URL);
@@ -162,6 +159,7 @@ public class Masterpassword {
         return new String[]{user, pass1};
     }
 }
+
 /*
  * Username: jana123
  * Passwort: ooo.oreo
