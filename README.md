@@ -3,24 +3,29 @@
 Als Abschlussprojekt des Semesters darf ich ein Passwortmanager machen, der Passwörter speichern, ausgeben und löschen kann. Die Passwörter werden verschlüsselt und in einer Datenbank gespeichert.
 
 
-
 ## Getting Started
 
-Mit dieser Anleitung, bekommen sie gezielte Anweisungen, um den Passwortmanager lokal auf ihrem Rechner installieren zu können.
+Mit dieser Anleitung, bekommen Sie gezielte Anweisungen, um den Passwortmanager lokal auf ihrem Rechner installieren zu können.
 
 ### Vorraussetzungen
 
 Die Vorraussetzungen um den Passwortmanager benutzen zu können sind: 
 
 - IntelliJ IDEA Ultimate, https://www.jetbrains.com/idea/download/?section=windows
-- JDK 23: Windows, https://www.oracle.com/java/technologies/downloads/#jdk24-windows
-
-  macOS, https://download.oracle.com/java/23/archive/jdk-23.0.2_macos-aarch64_bin.tar.gz
+- JDK 23: Windows, https://download.oracle.com/java/23/archive/jdk-23.0.2_windows-x64_bin.zip
+- JDK 23: macOS, https://download.oracle.com/java/23/archive/jdk-23.0.2_macos-x64_bin.tar.gz
 - Jakarta EE, https://jakarta.ee/release/10/
 
 ### Installieren
 
+#### Möglichkeit 1:
+
 Um den Passwortmanager auf ihrem lokalen Gerät abszuspielen, müssen Sie nur die ZIP Datei extrahieren und dann können Sie los legen.
+
+
+#### Möglichkeit 2:
+
+Man kann auch einfach dieses Repository klonen und in Intellij ausführen.
 
 ### Ausführung:
 
