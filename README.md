@@ -15,6 +15,8 @@ Die Vorraussetzungen um den Passwortmanager benutzen zu können sind:
 - JDK 23: Windows, https://download.oracle.com/java/23/archive/jdk-23.0.2_windows-x64_bin.zip
 - JDK 23: macOS, https://download.oracle.com/java/23/archive/jdk-23.0.2_macos-x64_bin.tar.gz
 - Jakarta EE, https://jakarta.ee/release/10/
+- MySQL, https://dev.mysql.com/downloads/installer/
+  
 
 ### Installieren
 
@@ -26,6 +28,8 @@ Um den Passwortmanager auf ihrem lokalen Gerät abszuspielen, müssen Sie nur di
 #### Möglichkeit 2:
 
 Man kann auch einfach dieses Repository klonen und in Intellij ausführen.
+
+
 
 ### Ausführung:
 
