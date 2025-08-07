@@ -6,7 +6,7 @@ import static ch.css.inexkasso.Constant.URL;
 
 public class HelpFunction {
     public static void help() {
-        String sql = "SELECT possiblecommands, behaviour FROM cmd";
+        String sql = "SELECT possiblecommands, behaviour FROM COMMANDS";
 
         try (Connection conn = DriverManager.getConnection(URL);
              Statement stmt = conn.createStatement();
@@ -23,6 +23,7 @@ public class HelpFunction {
             }
         } catch (SQLException e) {
             System.err.println("Fehler beim Abrufen der Hilfeseite: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }
