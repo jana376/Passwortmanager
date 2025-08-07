@@ -30,14 +30,14 @@ Um den Passwortmanager auf ihrem lokalen Gerät abszuspielen, müssen Sie nur di
 2. Wechseln Sie zu der Datei wo der Passwortmanager drin gespeichert ist
 3. z.B.
    
-                     cd C:\temp\Passwortmanager
+       cd C:\temp\Passwortmanager
 5. dann geben Sie folgendes ein:
    
-             mvn clean compile
+       mvn clean compile
 
 6. und dann:
 
-          mvn exec:java -Dexec.mainClass="ch.css.inexkasso.Main"
+        mvn exec:java -Dexec.mainClass="ch.css.inexkasso.Main"
             
 
 
@@ -45,11 +45,7 @@ Um den Passwortmanager auf ihrem lokalen Gerät abszuspielen, müssen Sie nur di
 
 Man kann auch einfach dieses Repository klonen und in Intellij ausführen.
 
-
-
-### Ausführung:
-
-Main starten
+1. Main starten
 
 #### Registrieren
 Wenn es das erste Mal ist, wo man den passwort manager benutzt, dann wird man gefragt ob man sich registrieren möchte, dort kann man einfach ein 'y' eingeben und die ENTER-Taste drücken.
