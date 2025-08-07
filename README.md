@@ -16,8 +16,7 @@ Die Vorraussetzungen um den Passwortmanager benutzen zu können sind:
 - JDK 23: macOS, https://download.oracle.com/java/23/archive/jdk-23.0.2_macos-x64_bin.tar.gz
 - Jakarta EE, https://jakarta.ee/release/10/
 - MySQL, https://dev.mysql.com/downloads/installer/
-- Maven installiert und im Path haben: Windows, maven-mvnd-1.0.2-windows-amd64.zip
-- Maven installiert und im Path haben: macOS, maven-mvnd-1.0.2-darwin-amd64.zip
+- Maven installiert und im Path haben, https://maven.apache.org/download.cgi
   
 
 ### Installieren
