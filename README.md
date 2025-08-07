@@ -16,6 +16,7 @@ Die Vorraussetzungen um den Passwortmanager benutzen zu können sind:
 - JDK 23: macOS, https://download.oracle.com/java/23/archive/jdk-23.0.2_macos-x64_bin.tar.gz
 - Jakarta EE, https://jakarta.ee/release/10/
 - MySQL, https://dev.mysql.com/downloads/installer/
+- Maven installiert und im Path haben, https://maven.apache.org/download.cgi
   
 
 ### Installieren
@@ -24,16 +25,26 @@ Die Vorraussetzungen um den Passwortmanager benutzen zu können sind:
 
 Um den Passwortmanager auf ihrem lokalen Gerät abszuspielen, müssen Sie nur die ZIP Datei extrahieren und dann können Sie los legen.
 
+1. Öffnen Sie Ihr Terminal
+2. Wechseln Sie zu der Datei wo der Passwortmanager drin gespeichert ist
+3. z.B.
+   
+       cd C:\temp\Passwortmanager
+5. dann geben Sie folgendes ein:
+   
+       mvn clean compile
+
+6. und dann:
+
+        mvn exec:java -Dexec.mainClass="ch.css.inexkasso.Main"
+            
+
 
 #### Möglichkeit 2:
 
 Man kann auch einfach dieses Repository klonen und in Intellij ausführen.
 
-
-
-### Ausführung:
-
-Main starten
+1. Main starten
 
 #### Registrieren
 Wenn es das erste Mal ist, wo man den passwort manager benutzt, dann wird man gefragt ob man sich registrieren möchte, dort kann man einfach ein 'y' eingeben und die ENTER-Taste drücken.
