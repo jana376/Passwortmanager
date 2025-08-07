@@ -23,7 +23,7 @@ public class Masterpassword {
     }
 
     public int getNextMasterpasswordId() throws SQLException {
-        String sql = "SELECT MAX(MasterpasswordId) FROM Masterpassword";
+        String sql = "SELECT MasterpasswordId FROM MasterPassword";
         try (Connection conn = DriverManager.getConnection(URL);
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
