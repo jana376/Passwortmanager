@@ -1,7 +1,7 @@
 package ch.css.inexkasso;
 
 public class Constant {
-    public static final String URL = "jdbc:derby:database;create=true";
+    public static final String URL = "jdbc:derby:C/temp/database;create=true";
     public static final String SAFE_COMMAND = "safe";
     public static final String LIST_LABEL_COMMAND = "list";
     public static final String GET_PASSWORD_WITH_LABEL_COMMAND = "get";
