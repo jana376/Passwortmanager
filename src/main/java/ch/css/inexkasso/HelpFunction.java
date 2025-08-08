@@ -6,20 +6,21 @@ import static ch.css.inexkasso.Constant.URL;
 
 public class HelpFunction {
     public static void help() {
-        String sql = "SELECT possiblecommands, behaviour FROM COMMANDS";
+        String tableName = "COMMANDS";
+        String sql = "SELECT POSSIBLECOMMANDS, BEHAVIOUR FROM " + tableName;
 
-        try (Connection conn = DriverManager.getConnection(URL);
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+        try (Connection conn = DriverManager.getConnection(URL)) {
+            try (Statement stmt = conn.createStatement();
+                 ResultSet rs = stmt.executeQuery(sql)) {
 
-            System.out.printf("| %-35s | %-70s |\n", "possiblecommands", "behaviour");
-            System.out.println("----------------------------------------------------------------------------------------------------------------");
+                System.out.printf("| %-35s | %-70s |\n", "possiblecommands", "behaviour");
+                System.out.println("----------------------------------------------------------------------------------------------------------------");
 
-            while (rs.next()) {
-                String command = rs.getString("possiblecommands");
-                String behaviour = rs.getString("behaviour");
-                System.out.printf("| %-35s | %-70s |\n", command, behaviour);
-
+                while (rs.next()) {
+                    String command = rs.getString("POSSIBLECOMMANDS");
+                    String behaviour = rs.getString("BEHAVIOUR");
+                    System.out.printf("| %-35s | %-70s |\n", command, behaviour);
+                }
             }
         } catch (SQLException e) {
             System.err.println("Fehler beim Abrufen der Hilfeseite: " + e.getMessage());

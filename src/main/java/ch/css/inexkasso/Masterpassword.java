@@ -7,23 +7,32 @@ import static ch.css.inexkasso.Constant.*;
 import static javax.accessibility.AccessibleRole.TABLE;
 
 public class Masterpassword {
-    public static void createTableIfNotExists() {
-        String SQL_CREATE_TABLE_MASTERPASSWORD = "CREATE TABLE " + TABLE + " (" +
-                "MasterpasswordId INT PRIMARY KEY, " +
-                "Username VARCHAR(255), " +
-                "Masterpassword VARCHAR(255))";
-        try (Connection conn = DriverManager.getConnection(URL);
-             Statement stmt = conn.createStatement()) {
-            stmt.executeUpdate(SQL_CREATE_TABLE_MASTERPASSWORD);
-        } catch (SQLException e) {
-            if (!"X0Y32".equals(e.getSQLState())) {
-                System.err.println("Fehler beim Erstellen der Tabelle");
+    public static void createTableIfNotExists() throws SQLException {
+        try (Connection conn = DriverManager.getConnection(URL)) {
+            DatabaseMetaData dbMeta = conn.getMetaData();
+
+            // Tabelle mit exaktem Namen "MasterPassword" prüfen (case-sensitive!)
+            try (ResultSet rs = dbMeta.getTables(null, null, "MasterPassword", null)) {
+                if (!rs.next()) {
+                    String createTableSQL = "CREATE TABLE \"MasterPassword\" (" +
+                            "MasterpasswordId INT PRIMARY KEY, " +
+                            "Username VARCHAR(50), " +
+                            "Masterpassword VARCHAR(100))";
+                    try (Statement stmt = conn.createStatement()) {
+                        stmt.executeUpdate(createTableSQL);
+                        System.out.println("Tabelle MasterPassword wurde erstellt.");
+                    }
+                } else {
+                    System.out.println("Tabelle MasterPassword existiert bereits.");
+                }
             }
         }
     }
 
+
+
     public int getNextMasterpasswordId() throws SQLException {
-        String sql = "SELECT MAX(MasterpasswordId) FROM MASTERPASSWORD";
+        String sql = "SELECT MAX(MasterpasswordId) FROM \"MasterPassword\"";
         try (Connection conn = DriverManager.getConnection(URL);
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
@@ -38,7 +47,6 @@ public class Masterpassword {
     public boolean checkCredentials(String inputUsername, String inputPassword) throws SQLException {
         String sql = "SELECT 1 FROM " + TABLE + " WHERE Username = ? AND Masterpassword = ?";
         try (Connection conn = DriverManager.getConnection(URL);
-
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, inputUsername);
             stmt.setString(2, inputPassword);
@@ -125,7 +133,7 @@ public class Masterpassword {
 
     public void insertMasterPassword(String username, String password) throws SQLException {
         int nextId = getNextMasterpasswordId();
-        String sql = "INSERT INTO Masterpassword (MasterpasswordId, Username, Masterpassword) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO \"MasterPassword\" (MasterpasswordId, Username, Masterpassword) VALUES (?, ?, ?)";
         try (Connection conn = DriverManager.getConnection(URL);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, nextId);
@@ -144,8 +152,6 @@ public class Masterpassword {
 
         System.out.print("Bitte bestätige das Masterpasswort: ");
         String pass2 = scanner.nextLine().trim();
-
-
         return new String[]{user, pass1, pass2};
     }
 

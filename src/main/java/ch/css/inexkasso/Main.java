@@ -13,16 +13,17 @@ import static ch.css.inexkasso.SafeFunction.*;
 
 public class Main {
 
-    public static void main(String[] args) throws SQLException {
-        createTableIfNotExists();
-        Masterpassword masterpassword = new Masterpassword();
-
-
-        Scanner scanner = new Scanner(System.in);
-        masterpassword.handleMasterPassword(scanner);
-        help();
-        askWhatUserWantsToDo(scanner);
-        scanner.close();
+    public static void main(String[] args) {
+        try (Scanner scanner = new Scanner(System.in)) {
+            createTableIfNotExists();
+            Masterpassword masterpassword = new Masterpassword();
+            masterpassword.handleMasterPassword(scanner);
+            help();
+            askWhatUserWantsToDo(scanner);
+        } catch (SQLException e) {
+            System.err.println("Es ist ein Datenbankfehler aufgetreten:");
+            e.printStackTrace();
+        }
     }
 
     private static void askWhatUserWantsToDo(Scanner scanner) {
